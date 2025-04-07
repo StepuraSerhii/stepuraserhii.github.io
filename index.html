@@ -1,76 +1,43 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <script type="text/javascript">
-    (function (d,s,u,e,p) {
-      p=d.getElementsByTagName(s)[0],e=d.createElement(s),e.async=1,e.src=u,p.parentNode.insertBefore(e, p);
-    })(document, 'script', 'https://script.ringostat.com/v4/1b/1b754cb63e621f14d71ac9233d0ba04a7fd8a22a.js');
-    var pw = function() {if (typeof(ringostatAnalytics) === "undefined") {setTimeout(pw,100);} else {ringostatAnalytics.sendHit('pageview');}};
-    pw();
-</script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Телефонія</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 20px;
-      background-color: #f8f8f8;
-      border-radius: 8px;
-    }
-
-    h1 {
-      text-align: center;
-    }
-
-    form {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    input, button {
-      padding: 10px;
-      margin-bottom: 10px;
-      font-size: 16px;
-    }
-
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Телефонія</h1>
   <p>Телефонія — це технологія, що дозволяє передавати голосову інформацію через відстань за допомогою телефонних мереж, включаючи VoIP (IP-телефонія). Вона використовується для зв'язку між людьми, як в особистому, так і в бізнес-середовищі.</p>
 
-  <form>
-    <label for="name">Ваше ім'я:</label>
-    <input type="text" id="name" name="name" placeholder="Введіть ім'я" required />
-  
-    <label for="phone">Номер телефону:</label>
-    <input type="tel" id="phone" name="phone" placeholder="+380..." required />
-  
-    <label for="order">Опис замовлення:</label>
-    <textarea id="order" name="order" placeholder="Що саме вас цікавить?" rows="4" required></textarea>  
-    <button type="submit">Надіслати</button>
-  </form>
-  
-  <label for="product">Оберіть послугу:</label>
-  <select id="product" name="product" required>
-    <option value="">-- Оберіть варіант --</option>
-    <option value="analytics">Аналітика</option>
-    <option value="telephony">Телефонія</option>
-    <option value="callback">Коллбек</option>
-  </select>
+  <!-- Заголовок форми -->
+  <div class="form">
+    <div class="form-header">
+      <p>Заповніть форму</p>
+    </div>
+
+    <!-- Форма -->
+    <form>
+      <label for="name">Ваше ім'я:</label>
+      <input type="text" id="name" name="name" placeholder="Введіть ім'я" required />
+
+      <label for="phone">Номер телефону:</label>
+      <input type="tel" id="phone" name="phone" placeholder="+380..." required />
+
+      <label for="order">Опис замовлення:</label>
+      <textarea id="order" name="order" placeholder="Що саме вас цікавить?" rows="4" required></textarea>
+
+      <label for="product">Оберіть послугу:</label>
+      <select id="product" name="product" required>
+        <option value="">-- Оберіть варіант --</option>
+        <option value="analytics">Аналітика</option>
+        <option value="telephony">Телефонія</option>
+        <option value="callback">Коллбек</option>
+      </select>
+
+      <!-- Кнопочка надіслати -->
+      <button type="submit" class="fancy-button">Надіслати</button>
+    </form>
+  </div>
 </body>
 </html>
