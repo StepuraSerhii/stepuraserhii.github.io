@@ -5,13 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Телефонія</title>
   <link rel="stylesheet" href="styles.css">
-  <script type="text/javascript">
-    (function (d,s,u,e,p) {
-      p=d.getElementsByTagName(s)[0],e=d.createElement(s),e.async=1,e.src=u,p.parentNode.insertBefore(e, p);
-    })(document, 'script', 'https://script.ringostat.com/v4/1b/1b754cb63e621f14d71ac9233d0ba04a7fd8a22a.js');
-    var pw = function() {if (typeof(ringostatAnalytics) === "undefined") {setTimeout(pw,100);} else {ringostatAnalytics.sendHit('pageview');}}; 
-    pw();
-  </script>
+  <script src="script.js" defer></script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -28,16 +22,9 @@
 
     gtag('config', 'G-9H5MHGWCNY');
   </script>
-  <!-- Навігація -->
-  <script>
-    const burger = document.getElementById('burger');
-    const navLinks = document.getElementById('navLinks');
-    
-    burger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
-  </script>
 </head>
+
+
 
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -45,21 +32,27 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <!-- НАВІГАЦІЯ -->
-  <nav class="navbar">
-    <div class="navbar-container">
-      <a href="index.html" class="logo">MyCompany</a>
-      <div class="burger" id="burger">&#9776;</div>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#telephony">Телефонія</a></li>
-        <li><a href="#analytics">Аналітика</a></li>
-        <li><a href="#form">Форма</a></li>
-        <li><a href="#contact">Контакти</a></li>
-      </ul>
-      <!-- Іконка телефону для мобільної версії -->
-      <a href="tel:+380000000000" class="phone-icon" id="phoneIcon">&#128222;</a>
-    </div>
-  </nav>
+<!-- НАВІГАЦІЯ -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Бургер-меню -->
+    <div class="burger" id="burger">&#9776;</div>
+    
+    <!-- Логотип -->
+    <a href="index.html" class="logo">MyCompany</a>
+    
+    <!-- Іконка телефону для мобільної версії -->
+    <a href="tel:+380000000000" class="phone-icon" id="phoneIcon">&#9743;</a>
+  </div>
+
+  <!-- Меню -->
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#telephony">Телефонія</a></li>
+    <li><a href="#analytics">Аналітика</a></li>
+    <li><a href="#form">Форма</a></li>
+    <li><a href="#contact">Контакти</a></li>
+  </ul>
+</nav>
 
   <div class="page-container">
     <h1>Телефонія</h1>
