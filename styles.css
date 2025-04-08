@@ -25,7 +25,7 @@ h1 {
   margin-bottom: 40px;
 }
 
-/* ----- Навігація ----- */
+/* Загальні стилі навігації */
 .navbar {
   background-color: #4b2db3;
   position: fixed;
@@ -49,12 +49,15 @@ h1 {
   font-weight: bold;
   color: #fff;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 30px;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links li a {
@@ -68,28 +71,63 @@ h1 {
   color: #d1c3ff;
 }
 
-/* Бургер-меню */
 .burger {
   display: none;
   font-size: 2rem;
   color: white;
   cursor: pointer;
+  flex-shrink: 0;
+}
+
+.phone-icon {
+  display: none;
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  padding: 10px;
+  flex-shrink: 0;
 }
 
 /* Відступ для контенту під навігацією */
 body {
-  padding-top: 70px; /* висота навігації */
+  padding-top: 70px;
 }
 
-/* ----- Мобільна адаптація ----- */
-@media (max-width: 768px) {
+/* ПК-версія */
+@media (min-width: 769px) {
+  .navbar-container {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .phone-icon {
+    display: none;
+  }
+
   .burger {
-    display: block;
+    display: none;
+  }
+}
+
+/* Мобільна версія */
+@media (max-width: 768px) {
+  .navbar-container {
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
   }
 
   .nav-links {
     display: none;
     flex-direction: column;
+    gap: 15px;
     background-color: #4b2db3;
     position: absolute;
     top: 60px;
@@ -103,24 +141,42 @@ body {
     display: flex;
   }
 
+  .burger {
+    display: block;
+  }
+
+  .phone-icon {
+    display: block;
+  }
+
+  .logo {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+
   .nav-links li {
     padding: 10px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
+
+  .phone-icon {
+    margin-top: 10px;
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    margin-left: auto;
+  }
 }
 
-/* Адаптивність для мобільних */
-@media (max-width: 768px) {
-  .navbar-container {
+/* Покращення адаптивності для більш широких екранів */
+@media (max-width: 850px) {
+  .form-analytics-wrapper {
     flex-direction: column;
-    align-items: flex-start;
   }
 
-  .nav-links {
-    flex-direction: column;
+  .analytics-text,
+  .form {
     width: 100%;
-    margin-top: 10px;
-    gap: 15px;
   }
 }
 
