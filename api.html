@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <!-- 🌐 МЕТА та ПІДКЛЮЧЕННЯ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Телефонія</title>
+
+  <!-- 🎨 Стилі -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- ⚙️ Скрипти -->
+  <script src="script.js" defer></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9H5MHGWCNY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-9H5MHGWCNY');
+  </script>
+</head>
+
+<body>
+  <!-- 🛑 Noscript Google Tag Manager -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N8Q4GXSL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- 🔝 НАВІГАЦІЯ -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="burger" id="burger">&#9776;</div>
+        <a href="index.html" class="logo">MyCompany</a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#API">API</a></li>
+          <li><a href="#analytics">Аналітика</a></li>
+          <li><a href="#form">Форма</a></li>
+          <li><a href="#contact">Контакти</a></li>
+        </ul>
+        <a href="tel:+380000000000" class="phone-icon" id="phoneIcon">&#9743;</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 📞 API ІНТЕГРАЦІЯ -->
+  <section class="form-analytics-wrapper">
+    <div class="container">
+      <h2>Форма виклику #1</h2>
+      <input type="text" id="authKey" placeholder="Введіть Auth-key">
+      <input type="text" id="phoneInput" placeholder="Введіть номер телефону">
+      <button id="callButton" class="fancy-button">Зателефонувати</button>
+    </div>
+
+    <div class="container">
+      <h2>Форма виклику #2</h2>
+      <input type="text" placeholder="Введіть Auth-key">
+      <input type="text" placeholder="Введіть номер телефону">
+      <button class="fancy-button">Зателефонувати</button>
+    </div>
+  </section>
+
+  <!-- 🔚 ФУТЕР -->
+  <footer class="footer">
+    <p>Зв’яжіться з нами: <a href="tel:+380970000000">+380970000000</a></p>
+  </footer>
+</body>
+</html>
