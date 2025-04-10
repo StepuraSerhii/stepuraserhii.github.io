@@ -9,7 +9,15 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/api/call', async (req, res) => {
-  const { phoneNumber, authKey } = req.body;
+  let { phoneNumber, authKey } = req.body;
+
+  // 🔍 Лог: вхідні дані
+  console.log("📥 Отримано запит від клієнта:");
+  console.log("📞 Номер:", phoneNumber);
+  console.log("🔑 Ключ:", authKey);
+
+  // 🧼 Очищення номера (залишаємо тільки цифри)
+  phoneNumber = phoneNumber.replace(/\D/g, '');
 
   const payload = {
     jsonrpc: "2.0",
@@ -25,6 +33,10 @@ app.post('/api/call', async (req, res) => {
     }
   };
 
+  // 🔍 Лог: що надсилаємо в Ringostat
+  console.log("📤 Надсилаємо в Ringostat такий payload:");
+  console.log(JSON.stringify(payload, null, 2));
+
   try {
     const response = await fetch("https://api.ringostat.net/a/v2", {
       method: "POST",
@@ -36,9 +48,14 @@ app.post('/api/call', async (req, res) => {
     });
 
     const data = await response.json();
+
+    // 🔍 Лог: відповідь від Ringostat
+    console.log("📥 Відповідь від Ringostat:");
+    console.log(data);
+
     res.json(data);
   } catch (error) {
-    console.error("Помилка сервера:", error);
+    console.error("❌ Помилка сервера:", error);
     res.status(500).json({ error: "Серверна помилка при запиті" });
   }
 });
