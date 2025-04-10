@@ -1,27 +1,57 @@
-//СКРИПТ ДЛЯ НАВІГАЦІЇ//
-// Отримуємо елементи для бургер-меню та списку навігації
-const burger = document.getElementById("burger"); // Бургер-меню (іконка)
-const menu = document.getElementById("navLinks");  // Список навігаційних посилань
+// =========================
+// 🌐 БУРГЕР-МЕНЮ ТА НАВІГАЦІЯ
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("navLinks");
+  const navLinks = document.querySelectorAll(".nav-links a");
 
-// Додаємо слухача події на бургер-меню
-burger.addEventListener("click", () => {
-  // Перевірка, чи меню відкрите, якщо так — закрити, якщо ні — відкрити
-  menu.classList.toggle("active"); // Перемикає клас "active", що відкриває або закриває меню
+  // 🎯 Перемикання меню на мобільних
+  burger?.addEventListener("click", () => {
+    menu?.classList.toggle("active");
+  });
+
+  // 🎯 Закриття меню після переходу по пункту
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      menu?.classList.remove("active");
+    });
+  });
+
+  // 🎯 Додавання тіней до навбару при скролі
+  const navbar = document.querySelector(".navbar");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 20) {
+      navbar?.classList.add("scrolled");
+    } else {
+      navbar?.classList.remove("scrolled");
+    }
+  });
 });
 
 
-
-//СКРИПТ РІНГОСТАТ//
+// =========================
+// 📞 API ВИКЛИК (НЕ ЧІПАТИ: Ringostat)
+// =========================
 (function (d,s,u,e,p) {
   p=d.getElementsByTagName(s)[0],e=d.createElement(s),e.async=1,e.src=u,p.parentNode.insertBefore(e, p);
 })(document, 'script', 'https://script.ringostat.com/v4/1b/1b754cb63e621f14d71ac9233d0ba04a7fd8a22a.js');
-var pw = function() {if (typeof(ringostatAnalytics) === "undefined") {setTimeout(pw,100);} else {ringostatAnalytics.sendHit('pageview');}}; 
+var pw = function() {
+  if (typeof(ringostatAnalytics) === "undefined") {
+    setTimeout(pw, 100);
+  } else {
+    ringostatAnalytics.sendHit('pageview');
+  }
+}; 
 pw();
 
-//СКРИПТ API з'єдання нмоеру та схеми//
-document.getElementById("callButton").addEventListener("click", () => {
-  const phoneNumber = document.getElementById("phoneInput").value.trim();
-  const authKey = document.getElementById("authKey").value.trim();
+
+// =========================
+// ☎️ ОБРОБКА ВИКЛИКУ ЧЕРЕЗ API
+// =========================
+document.getElementById("callButton")?.addEventListener("click", () => {
+  const phoneNumber = document.getElementById("phoneInput")?.value.trim();
+  const authKey = document.getElementById("authKey")?.value.trim();
 
   if (!phoneNumber || !authKey) {
     alert("Будь ласка, заповніть усі поля");

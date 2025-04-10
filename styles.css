@@ -1,9 +1,16 @@
-/* Загальна структура */
+/* ===================== */
+/* 🌐 Базові стилі сторінки */
+/* ===================== */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f8f8f8;
   margin: 0;
   padding: 0;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+h1, h2 {
+  text-align: center;
 }
 
 .page-container {
@@ -14,36 +21,34 @@ body {
   border-radius: 12px;
 }
 
-h1 {
-  text-align: center;
-  font-size: 2rem;
-}
-
 .intro-text {
   text-align: center;
   font-size: 1.1rem;
   margin-bottom: 40px;
 }
 
-/* Загальні стилі для навігації */
+/* ===================== */
+/* 🔝 Навігація */
+/* ===================== */
 .navbar {
   background-color: #4b2db3;
   position: sticky;
   top: 0;
-  width: 100%;
   z-index: 1000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 0;  /* Додаємо відступи для стабільного вигляду */
-  height: 70px;  /* Мінімальна висота для навігації */
+  height: 70px;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0px 0px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 20px;
 }
 
 .logo {
@@ -51,10 +56,6 @@ h1 {
   font-weight: bold;
   color: #fff;
   text-decoration: none;
-  display: flex;
-  justify-content: center; /* По горизонталі */
-  align-items: center; /* По вертикалі */
-  height: 100%; /* Заповнює всю висоту контейнера */
 }
 
 .nav-links {
@@ -69,144 +70,108 @@ h1 {
   color: white;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
 
 .nav-links li a:hover {
   color: #d1c3ff;
 }
 
-.burger {
-  display: none;
+.burger,
+.phone-icon {
   font-size: 2rem;
   color: white;
   cursor: pointer;
-  flex-shrink: 0;
+  background: none;
+  border: none;
+}
+
+.burger {
+  display: none;
 }
 
 .phone-icon {
-  display: none;
-  font-size: 2rem;
-  color: white;
   text-decoration: none;
-  margin-left: 20px;
-  padding: 10px;
-  flex-shrink: 0;
 }
 
-/* ПК-версія */
-@media (min-width: 769px) {
-  .navbar-container {
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-  }
-
-  .phone-icon {
-    display: block; /* Іконка телефону для десктопу */
-  }
-
-  .burger {
-    display: none;
-  }
-}
-
-/* Мобільна версія */
+/* 📱 Мобільна версія */
 @media (max-width: 768px) {
   .navbar-container {
     justify-content: space-between;
-    align-items: center;
-    padding: 0x 0px;
+  }
+
+  .burger {
+    display: block;
+    order: 1;
+  }
+
+  .logo {
+    order: 2;
+    margin: 0 auto;
+  }
+
+  .phone-icon {
+    display: block;
+    order: 3;
   }
 
   .nav-links {
     display: none;
     flex-direction: column;
-    gap: 15px;
     background-color: #4b2db3;
     position: absolute;
-    top: 60px; /* Відстань від верхнього краю */
+    top: 70px;
     right: 0;
     width: 100%;
-    text-align: center;
     padding: 15px 0;
-    max-height: calc(100vh - 60px); /* Обмежуємо висоту меню */
-    overflow-y: auto; /* Додаємо прокручування для випадку, коли контент не поміщається */
-    box-sizing: border-box;
+    text-align: center;
   }
 
   .nav-links.active {
     display: flex;
   }
-
-  .burger {
-    display: block;
-  }
-
-  .phone-icon {
-    display: block;
-  }
-
-  .logo {
-    flex-grow: 1;
-    margin-right: 0px;
-  }
-
-  .nav-links li {
-    padding: 10px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .phone-icon {
-    margin-top: 0;
-    font-size: 2rem;
-    color: white;
-    text-decoration: none;
-    margin-left: auto;
-  }
 }
 
-/* Обгортка з текстом і формою */
+/* ===================== */
+/* 🧮 Контент: аналітика + форма */
+/* ===================== */
 .form-analytics-wrapper {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
   gap: 40px;
   flex-wrap: wrap;
+  padding: 40px 20px;
 }
 
-/* Текст про аналітику */
-.analytics-text {
+.analytics-text, .form {
   flex: 1 1 45%;
+}
+
+.container {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
-/* Форма */
-.form {
-  flex: 1 1 45%;
+.container h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .form-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: linear-gradient(135deg, #7b61ff, #b493ff);
   color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 20px 30px;
+  padding: 20px;
   border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
   text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 form {
@@ -215,14 +180,11 @@ form {
 }
 
 label {
-  margin-bottom: 8px;
   font-weight: 600;
-  color: #333;
+  margin-bottom: 8px;
 }
 
-input,
-textarea,
-select {
+input, textarea, select {
   padding: 12px;
   margin-bottom: 20px;
   font-size: 1rem;
@@ -232,13 +194,9 @@ select {
   box-sizing: border-box;
 }
 
-/* Стилі для select */
 select {
-  background-color: #f9f9f9;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
+  background: #f9f9f9 url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 16px center;
   background-size: 12px;
 }
 
@@ -249,19 +207,21 @@ select:focus {
   outline: none;
 }
 
-/* Кнопка */
+/* ===================== */
+/* 🎯 Кнопки */
+/* ===================== */
 .fancy-button {
   background: linear-gradient(135deg, #7b61ff, #a974ff);
   color: white;
-  padding: 14px 28px;
+  padding: 14px;
   font-size: 1rem;
   font-weight: 600;
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 6px 15px rgba(123, 97, 255, 0.4);
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(123, 97, 255, 0.4);
+  transition: 0.3s ease;
 }
 
 .fancy-button:hover {
@@ -272,58 +232,33 @@ select:focus {
 
 .fancy-button:active {
   transform: scale(0.98);
-  box-shadow: 0 4px 10px rgba(123, 97, 255, 0.4);
 }
 
-/* Футер */
+/* ===================== */
+/* 🔚 Футер */
+/* ===================== */
 .footer {
   background-color: #2c2c2c;
-  color: #ffffff;
+  color: #fff;
   text-align: center;
   padding: 20px;
-  font-size: 1rem;
   margin-top: 60px;
   border-top: 4px solid #7b61ff;
 }
 
 .footer a {
   color: #a974ff;
-  text-decoration: none;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .footer a:hover {
   text-decoration: underline;
 }
 
-/* Адаптивність */
-@media (max-width: 850px) {
-  .form-analytics-wrapper {
-    flex-direction: column;
-  }
-
-  .analytics-text,
-  .form {
-    width: 100%;
-  }
-}
-
-/* АПІ з'єдання 2х номерів */
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 400px;
-  margin: 50px auto;
-}
-
-input {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
+/* ===================== */
+/* 📞 API: виклик за номером */
+/* ===================== */
 #callButton {
   background-color: #28a745;
   color: white;
@@ -333,8 +268,20 @@ input {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #218838;
-  }
 }
+
+#callButton:hover {
+  background-color: #218838;
+}
+
+/* ===================== */
+/* 📱 Адаптивність */
+/* ===================== */
+@media (max-width: 850px) {
+  .form-analytics-wrapper {
+    flex-direction: column;
+  }
+
+  .analytics-text, .form, .container {
+    width: 100%;
+  }

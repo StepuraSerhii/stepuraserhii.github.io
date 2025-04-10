@@ -1,74 +1,67 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+  <!-- 🌐 МЕТА та ПІДКЛЮЧЕННЯ -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Телефонія</title>
+
+  <!-- 🎨 Стилі -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- ⚙️ Скрипти -->
   <script src="script.js" defer></script>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-N8Q4GXSL');</script>
-  <!-- End Google Tag Manager -->
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9H5MHGWCNY"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-9H5MHGWCNY');
   </script>
 </head>
 
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N8Q4GXSL"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+  <!-- 🛑 Noscript Google Tag Manager -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N8Q4GXSL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- 🔝 НАВІГАЦІЯ -->
   <header class="header">
     <nav class="navbar">
       <div class="navbar-container">
-        
-        <!-- Бургер-меню -->
         <div class="burger" id="burger">&#9776;</div>
-        
-        <!-- Логотип -->
         <a href="index.html" class="logo">MyCompany</a>
-
-              <!-- Меню -->
-      <ul class="nav-links" id="navLinks">
-        <li><a href="api.html">API</a></li>
-        <li><a href="#analytics">Аналітика</a></li>
-        <li><a href="#form">Форма</a></li>
-        <li><a href="#contact">Контакти</a></li>
-      </ul>
-        
-        <!-- Іконка телефону для мобільної версії -->
+        <ul class="nav-links" id="navLinks">
+          <li><a href="api.html">API</a></li>
+          <li><a href="#analytics">Аналітика</a></li>
+          <li><a href="#form">Форма</a></li>
+          <li><a href="#contact">Контакти</a></li>
+        </ul>
         <a href="tel:+380000000000" class="phone-icon" id="phoneIcon">&#9743;</a>
       </div>
     </nav>
   </header>
+
+  <!-- 📄 ГОЛОВНИЙ ВМІСТ -->
   <div class="page-container">
     <h1>Телефонія</h1>
     <p class="intro-text">
-      Телефонія — це технологія, що дозволяє передавати голосову інформацію через відстань за допомогою телефонних мереж, включаючи VoIP (IP-телефонія). Вона використовується для зв'язку між людьми, як в особистому, так і в бізнес-середовищі.
+      Телефонія — це технологія, що дозволяє передавати голосову інформацію через відстань за допомогою телефонних мереж, включаючи VoIP (IP-телефонія).
     </p>
 
+    <!-- 📊 Аналітика + Форма -->
     <div class="form-analytics-wrapper">
-      <div class="analytics-text">
+
+      <!-- 🔍 Аналітика -->
+      <div class="analytics-text" id="analytics">
         <h2>Аналітика</h2>
         <p>Аналітика дозволяє відстежувати ключові метрики, приймати обґрунтовані бізнес-рішення та підвищувати ефективність процесів.</p>
       </div>
 
-      <div class="form">
+      <!-- 📝 Форма -->
+      <div class="form" id="form">
         <div class="form-header">
           <p>Заповніть форму</p>
         </div>
-
         <form>
           <label for="name">Ваше ім'я:</label>
           <input type="text" id="name" name="name" placeholder="Введіть ім'я" required />
@@ -86,19 +79,13 @@
             <option value="telephony">Телефонія</option>
             <option value="callback">Коллбек</option>
           </select>
-
-          <button type="submit" class="fancy-button">Надіслати</button>
         </form>
       </div>
     </div>
-    <div class="container">
-      <input type="text" id="authKey" placeholder="Введіть Auth-key">
-      <input type="text" id="phoneInput" placeholder="Введіть номер телефону">
-      <button id="callButton">Зателефонувати</button>
-    </div>
   </div>
 
-  <footer class="footer">
+  <!-- 🔚 ФУТЕР -->
+  <footer class="footer" id="contact">
     <p>Зв’яжіться з нами: <a href="tel:+380970000000">+380970000000</a></p>
   </footer>
 </body>
