@@ -18,8 +18,8 @@ app.post('/api/call', async (req, res) => {
     params: {
       callee_type: "scheme",
       caller: phoneNumber,
-      callee: "34373",
-      projectId: "39071",
+      callee: "231146",
+      projectId: "171946",
       direction: "out",
       manager_dst: "0"
     }
