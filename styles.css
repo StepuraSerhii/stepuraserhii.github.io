@@ -284,4 +284,53 @@ select:focus {
 
   .analytics-text, .form, .container {
     width: 100%;
+  }}
+
+/* 📱 Додаткові адаптивні стилі для API сторінки */
+@media (max-width: 768px) {
+  .form-analytics-wrapper {
+    flex-direction: column;
+    padding: 20px 10px;
+    gap: 20px;
   }
+
+  .container {
+    width: 100%;
+    padding: 16px;
+  }
+
+  input, textarea, select {
+    font-size: 1rem;
+    padding: 10px;
+    margin-bottom: 16px;
+  }
+
+  #callButton {
+    font-size: 1rem;
+    padding: 12px;
+    width: 100%;
+  }
+}
+
+/* 📱 Фікс горизонтального скролу та ширини */
+body {
+  overflow-x: hidden;
+}
+
+/* Забезпечення, щоб контейнери не "вилазили" */
+.navbar-container,
+.nav-links,
+.container,
+.form-analytics-wrapper {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Додаткове коригування навігації */
+@media (max-width: 768px) {
+  .nav-links {
+    right: 0;
+    left: 0;
+    width: 100%;
+  }
+}
