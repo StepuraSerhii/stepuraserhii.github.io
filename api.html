@@ -1,66 +1,90 @@
 <!DOCTYPE html>
+
 <html lang="uk">
 <head>
-  <!-- 🌐 МЕТА та ПІДКЛЮЧЕННЯ -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Телефонія</title>
-
-  <!-- 🎨 Стилі -->
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- ⚙️ Скрипти -->
-  <script src="script.js" defer></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9H5MHGWCNY"></script>
-  <script>
+<!-- 🌐 МЕТА та ПІДКЛЮЧЕННЯ -->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Телефонія</title>
+<!-- 🎨 Стилі -->
+<link href="styles.css" rel="stylesheet"/>
+<!-- ⚙️ Скрипти -->
+<script defer="" src="script.js"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9H5MHGWCNY"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-9H5MHGWCNY');
   </script>
 </head>
-
 <body>
-  <!-- 🛑 Noscript Google Tag Manager -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N8Q4GXSL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
-  <!-- 🔝 НАВІГАЦІЯ -->
-  <header class="header">
-    <nav class="navbar">
-      <div class="navbar-container">
-        <div class="burger" id="burger">&#9776;</div>
-        <a href="index.html" class="logo">MyCompany</a>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#API">API</a></li>
-          <li><a href="#analytics">Аналітика</a></li>
-          <li><a href="#form">Форма</a></li>
-          <li><a href="#contact">Контакти</a></li>
-        </ul>
-        <a href="tel:+380000000000" class="phone-icon" id="phoneIcon">&#9743;</a>
-      </div>
-    </nav>
-  </header>
-
-  <!-- 📞 API ІНТЕГРАЦІЯ -->
-  <section class="form-analytics-wrapper">
-    <div class="container">
-      <h2>Форма виклику #1</h2>
-      <input type="text" id="authKey" placeholder="Введіть Auth-key">
-      <input type="text" id="phoneInput" placeholder="Введіть номер телефону">
-      <button id="callButton" class="fancy-button">Зателефонувати</button>
-    </div>
-
-    <div class="container">
-      <h2>Форма виклику #2</h2>
-      <input type="text" placeholder="Введіть Auth-key">
-      <input type="text" placeholder="Введіть номер телефону">
-      <button class="fancy-button">Зателефонувати</button>
-    </div>
-  </section>
-
-  <!-- 🔚 ФУТЕР -->
-  <footer class="footer">
-    <p>Зв’яжіться з нами: <a href="tel:+380970000000">+380970000000</a></p>
-  </footer>
+<!-- 🛑 Noscript Google Tag Manager -->
+<noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-N8Q4GXSL" style="display:none;visibility:hidden" width="0"></iframe></noscript>
+<!-- 🔝 НАВІГАЦІЯ -->
+<header class="header">
+<nav class="navbar">
+<div class="navbar-container">
+<div class="burger" id="burger">☰</div>
+<a class="logo" href="index.html">MyCompany</a>
+<ul class="nav-links" id="navLinks">
+<li><a href="#API">API</a></li>
+<li><a href="#analytics">Аналітика</a></li>
+<li><a href="#form">Форма</a></li>
+<li><a href="#contact">Контакти</a></li>
+</ul>
+<a class="phone-icon" href="tel:+380000000000" id="phoneIcon">☏</a>
+</div>
+</nav>
+</header>
+<!-- 📞 API ІНТЕГРАЦІЯ -->
+<section class="form-analytics-wrapper">
+<div class="container form">
+<h2>Форма виклику #1</h2>
+<input id="authKey" placeholder="Введіть Auth-key" type="text"/>
+<input id="phoneInput" placeholder="Введіть номер телефону" type="text"/>
+<button class="fancy-button" id="callButton">Зателефонувати</button>
+</div>
+<div class="container form">
+<h2>Форма виклику #2</h2>
+<input placeholder="Введіть Auth-key" type="text"/>
+<input placeholder="Введіть номер телефону" type="text"/>
+<button class="fancy-button">Зателефонувати</button>
+</div>
+</section>
+<section class="form-analytics-wrapper">
+<div class="container form">
+<h2>Форма виклику #2</h2>
+<!-- Введення номера телефону -->
+<label for="phone">Введіть номер:</label>
+<input id="phone" name="phone" placeholder="+380..." required="" type="tel">
+<!-- Введення Auth-кей -->
+<label for="authKey">Введіть Аутх кей:</label>
+<input id="authKey" name="authKey" placeholder="Ваш Auth-key" required="" type="text">
+<!-- Введення ID проєкту -->
+<label for="projectId">Введіть ID проєкту:</label>
+<input id="projectId" name="projectId" placeholder="ID проєкту" required="" type="text">
+<!-- Введення ID схеми -->
+<label for="schemeId">Введіть ID схеми:</label>
+<input id="schemeId" name="schemeId" placeholder="ID схеми" required="" type="text">
+<!-- Вибір напрямку дзвінка -->
+<label for="direction">Виберіть напрямок дзвінка:</label>
+<select id="direction" name="direction" required="">
+<option value="0">Менеджер спочатку, клієнт після</option>
+<option value="1">Клієнт спочатку, менеджер після</option>
+</select>
+<label for="callType">Виберіть тип дзвінка:</label>
+<select id="callType" name="callType" required="">
+<option value="in">Вхідний</option>
+<option value="out">Вихідний</option>
+</select>
+<!-- Кнопка для відправки форми -->
+<button class="fancy-button" id="callButton">Зателефонувати</button>
+</input></input></input></input></div>
+</section>
+<!-- 🔚 ФУТЕР -->
+<footer class="footer">
+<p>Зв’яжіться з нами: <a href="tel:+380970000000">+380970000000</a></p>
+</footer>
 </body>
 </html>
