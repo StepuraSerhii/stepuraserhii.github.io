@@ -1,11 +1,20 @@
-<script type="text/javascript">
-    (function (d,s,u,e,p) {
-      p=d.getElementsByTagName(s)[0],e=d.createElement(s),e.async=1,e.src=u,p.parentNode.insertBefore(e, p);
-    })(document, 'script', 'https://script.ringostat.com/v4/1b/1b754cb63e621f14d71ac9233d0ba04a7fd8a22a.js');
-    var pw = function() {if (typeof(ringostatAnalytics) === "undefined") {setTimeout(pw,100);} else {ringostatAnalytics.sendHit('pageview');}};
-    pw();
-</script>
+(function (d, s, u, e, p) {
+  p = d.getElementsByTagName(s)[0];
+  e = d.createElement(s);
+  e.async = 1;
+  e.src = u;
+  p.parentNode.insertBefore(e, p);
+})(document, 'script', 'https://script.ringostat.com/v4/f5/f59c2bf87727b8935188a1577b76efc43d3aa8ce.js');
 
+// Очікуємо, поки скрипт завантажиться і ініціалізуємо функцію
+var pw = function () {
+  if (typeof (ringostatAnalytics) === "undefined") {
+    setTimeout(pw, 100); // повторюємо через 100 мс
+  } else {
+    ringostatAnalytics.sendHit('pageview');
+  }
+};
+pw();
 
 document.addEventListener("DOMContentLoaded", () => {
   const burger = document.getElementById("burger");
