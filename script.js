@@ -4,7 +4,7 @@
   e.async = 1;
   e.src = u;
   p.parentNode.insertBefore(e, p);
-})(document, 'script', 'https://script.ringostat.com/v4/f5/f59c2bf87727b8935188a1577b76efc43d3aa8ce.js');
+})(document, 'script', 'https://script.ringostat.com/v4/1b/1b754cb63e621f14d71ac9233d0ba04a7fd8a22a.js');
 
 // Очікуємо, поки скрипт завантажиться і ініціалізуємо функцію
 var pw = function () {
