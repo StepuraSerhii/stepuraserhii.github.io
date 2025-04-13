@@ -65,13 +65,13 @@
         <form>
           <label for="name">Ваше ім'я:</label>
           <input type="text" id="name" name="name" placeholder="Введіть ім'я" required />
-
+      
           <label for="phone">Номер телефону:</label>
           <input type="tel" id="phone" name="phone" placeholder="+380..." required />
-
+      
           <label for="order">Опис замовлення:</label>
           <textarea id="order" name="order" placeholder="Що саме вас цікавить?" rows="4" required></textarea>
-
+      
           <label for="product">Оберіть послугу:</label>
           <select id="product" name="product" required>
             <option value="">-- Оберіть варіант --</option>
@@ -79,6 +79,9 @@
             <option value="telephony">Телефонія</option>
             <option value="callback">Коллбек</option>
           </select>
+      
+          <!-- ✅ Додана кнопка -->
+          <button type="submit" class="fancy-button">Надіслати</button>
         </form>
       </div>
     </div>
