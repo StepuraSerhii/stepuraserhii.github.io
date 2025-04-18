@@ -1,0 +1,79 @@
+.api-forms-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap; /* 🔥 щоб на малих екранах ставали одна під одною */
+  gap: 40px; /* 🔥 проміжок між формами */
+  padding: 40px 20px;
+}
+
+.api-form-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  flex: 1 1 45%; /* 🔥 щоб було 2 форми в ряд */
+  min-width: 300px; /* 🔥 щоб на маленьких екранах не ламалось */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.api-form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.api-form-container label {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.api-form-container input,
+.api-form-container textarea,
+.api-form-container select {
+  padding: 12px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.api-form-container select {
+  appearance: none;
+  background: #f9f9f9 url("data:image/svg+xml,%3Csvg width='10' height='6'...") no-repeat right 16px center;
+  background-size: 12px;
+}
+
+.api-form-container select:focus {
+  border-color: #7b61ff;
+  box-shadow: 0 0 0 4px rgba(123, 97, 255, 0.2);
+  background-color: #fff;
+  outline: none;
+}
+
+.api-form-container .fancy-button {
+  background: linear-gradient(135deg, #7b61ff, #a974ff);
+  color: white;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 6px 15px rgba(123, 97, 255, 0.4);
+  transition: 0.3s ease;
+}
+
+.api-form-container .fancy-button:hover {
+  background: linear-gradient(135deg, #6a4fff, #965fff);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(123, 97, 255, 0.5);
+}
+
+.api-form-container .fancy-button:active {
+  transform: scale(0.98);
+}
