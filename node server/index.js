@@ -13,11 +13,13 @@ app.post('/api/call', async (req, res) => {
   let { phoneNumber, authKey } = req.body;
 
   console.log("📥 Отримано запит call:");
-  console.log("📞 Номер:", phoneNumber);
-  console.log("🔑 Ключ:", authKey);
+  console.log("📞 Номер телефону:", phoneNumber);
+  console.log("🔑 Ключ авторизації:", authKey);
 
+  // Очищення номера від непотрібних символів
   phoneNumber = phoneNumber.replace(/\D/g, '');
 
+  // Формування запиту до API Ringostat
   const payload = {
     jsonrpc: "2.0",
     id: 1,
@@ -25,10 +27,10 @@ app.post('/api/call', async (req, res) => {
     params: {
       callee_type: "scheme",
       caller: phoneNumber,
-      callee: "231146", // Можна змінити при потребі
-      projectId: "171946",
-      direction: "out",
-      manager_dst: "0"
+      callee: "231146", // ID схеми (за замовчуванням)
+      projectId: "171946", // ID проєкту (за замовчуванням)
+      direction: "out",    // Тип дзвінка
+      manager_dst: "0"     // Порядок дзвінка
     }
   };
 
@@ -51,15 +53,17 @@ app.post('/api/call', async (req, res) => {
   }
 });
 
-// 🔀 З'єднання номеру і схеми
+// 🔀 З'єднання номеру і схеми переадресації
 app.post('/api/connect', async (req, res) => {
   let { phoneNumber, authKey, projectId, schemeId, direction, manager_dst } = req.body;
 
   console.log("📥 Отримано запит connect:");
   console.log(req.body);
 
+  // Очищення номера від непотрібних символів
   phoneNumber = phoneNumber.replace(/\D/g, '');
 
+  // Формування запиту до API Ringostat
   const payload = {
     jsonrpc: "2.0",
     id: 1,
@@ -69,8 +73,8 @@ app.post('/api/connect', async (req, res) => {
       caller: phoneNumber,
       callee: schemeId,
       projectId: projectId,
-      direction: direction,         // 'in' або 'out'
-      manager_dst: Number(manager_dst) // 0 або 1
+      direction: direction,
+      manager_dst: Number(manager_dst)
     }
   };
 
