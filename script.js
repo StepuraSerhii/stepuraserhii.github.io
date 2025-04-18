@@ -45,50 +45,53 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // API виклик через сервер
-document.getElementById("callButton")?.addEventListener("click", () => {
-  const phoneNumber = document.getElementById("phone").value.trim();
-  const authKey = document.getElementById("authKey").value.trim();
-  const projectId = document.getElementById("projectId").value.trim();
-  const schemeId = document.getElementById("schemeId").value.trim();
-  const direction = document.getElementById("direction").value;  // Напрямок дзвінка: 0 або 1
-  const callType = document.getElementById("callType").value;    // Тип дзвінка: 'in' або 'out'
-
-  if (!phoneNumber || !authKey || !projectId || !schemeId) {
-    alert("Будь ласка, заповніть усі поля");
-    return;
-  }
-
-  console.log("📞 Відправка запиту на сервер...");
-
-  fetch("http://localhost:3001/api/call", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      phoneNumber,
-      authKey,
-      projectId,
-      schemeId,
-      direction,  // Напрямок дзвінка
-      callType    // Тип дзвінка
-    })
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log("✅ Відповідь сервера:", data);
-      if (data.error) {
-        alert("❌ Помилка: " + data.error.message);
-      } else {
-        alert("✅ Запит на виклик надіслано!");
-        document.getElementById("phone").value = "";
-        document.getElementById("authKey").value = "";
-        document.getElementById("projectId").value = "";
-        document.getElementById("schemeId").value = "";
-      }
-    })
-    .catch(error => {
-      console.error("❗ Помилка запиту:", error);
-      alert("Не вдалося надіслати запит: " + error.message);
+async function sendCall(authKey, phoneNumber) {
+  try {
+    const response = await fetch('https://твій-домен-на-рендері.onrender.com/api/call', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ authKey, phoneNumber })
     });
+    const result = await response.json();
+    console.log('✅ Результат виклику:', result);
+  } catch (error) {
+    console.error('❌ Помилка виклику:', error);
+  }
+}
+
+async function connectNumber(data) {
+  try {
+    const response = await fetch('https://твій-домен-на-рендері.onrender.com/api/connect', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    console.log('✅ Результат зєднання:', result);
+  } catch (error) {
+    console.error('❌ Помилка зєднання:', error);
+  }
+}
+
+document.getElementById('callButton1').addEventListener('click', () => {
+  const authKey = document.getElementById('authKey1').value;
+  const phoneNumber = document.getElementById('phoneInput1').value;
+  sendCall(authKey, phoneNumber);
+});
+
+document.getElementById('callButton2').addEventListener('click', () => {
+  const authKey = document.getElementById('authKey2').value;
+  const phoneNumber = document.getElementById('phoneInput2').value;
+  sendCall(authKey, phoneNumber);
+});
+
+document.getElementById('connectButton3').addEventListener('click', () => {
+  const authKey = document.getElementById('authKey3').value;
+  const phoneNumber = document.getElementById('phone3').value;
+  const projectId = document.getElementById('projectId3').value;
+  const schemeId = document.getElementById('schemeId3').value;
+  const direction = document.getElementById('direction3').value;
+  const callType = document.getElementById('callType3').value;
+
+  connectNumber({ authKey, phoneNumber, projectId, schemeId, direction, callType });
 });
