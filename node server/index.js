@@ -55,23 +55,30 @@ app.post('/api/call', async (req, res) => {
 
 // 🔀 З'єднання номеру і схеми переадресації
 app.post('/api/connect', async (req, res) => {
-  let { phoneNumber, authKey, projectId, schemeId, direction, manager_dst } = req.body;
+  let { phoneNumber, authKey, projectId, schemeId, sipLogin, direction, manager_dst } = req.body;
 
   console.log("📥 Отримано запит connect:");
   console.log(req.body);
 
-  // Очищення номера від непотрібних символів
   phoneNumber = phoneNumber.replace(/\D/g, '');
 
-  // Формування запиту до API Ringostat
+  // 🛠 Визначаємо кого ставити у callee і який тип
+  let calleeType = "scheme";
+  let callee = schemeId;
+
+  if (sipLogin && sipLogin.trim() !== "") {
+    calleeType = "sip_account";
+    callee = sipLogin;
+  }
+
   const payload = {
     jsonrpc: "2.0",
     id: 1,
     method: "Api\\V2\\Callback.external",
     params: {
-      callee_type: "scheme",
+      callee_type: calleeType,      // Або "scheme", або "sip_account"
       caller: phoneNumber,
-      callee: schemeId,
+      callee: callee,
       projectId: projectId,
       direction: direction,
       manager_dst: Number(manager_dst)
@@ -95,8 +102,4 @@ app.post('/api/connect', async (req, res) => {
     console.error("❌ Помилка сервера (connect):", error);
     res.status(500).json({ error: "Серверна помилка при запиті" });
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`✅ Сервер працює: http://localhost:${PORT}`);
 });
