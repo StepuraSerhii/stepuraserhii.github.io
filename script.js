@@ -1,3 +1,4 @@
+// Підключення зовнішнього скрипта Ringostat для аналітики
 (function (d, s, u, e, p) {
   p = d.getElementsByTagName(s)[0];
   e = d.createElement(s);
@@ -6,34 +7,35 @@
   p.parentNode.insertBefore(e, p);
 })(document, 'script', 'https://script.ringostat.com/v4/1b/1b754cb63e621f14d71ac9233d0ba04a7fd8a22a.js');
 
-// Очікуємо, поки скрипт завантажиться і ініціалізуємо функцію
+// Очікуємо завантаження Ringostat-аналітики і відправляємо pageview
 var pw = function () {
   if (typeof (ringostatAnalytics) === "undefined") {
-    setTimeout(pw, 100); // повторюємо через 100 мс
+    setTimeout(pw, 100); // Якщо аналітика ще не готова — повторюємо через 100 мс
   } else {
     ringostatAnalytics.sendHit('pageview');
   }
 };
 pw();
 
+// Запускаємо функції після завантаження сторінки
 document.addEventListener("DOMContentLoaded", () => {
   const burger = document.getElementById("burger");
   const menu = document.getElementById("navLinks");
   const navLinks = document.querySelectorAll(".nav-links a");
 
-  // Перемикання меню на мобільних
+  // Перемикання меню на мобільних пристроях
   burger?.addEventListener("click", () => {
     menu?.classList.toggle("active");
   });
 
-  // Закриття меню після переходу по пункту
+  // Закриття меню після кліку по посиланню
   navLinks.forEach(link => {
     link.addEventListener("click", () => {
       menu?.classList.remove("active");
     });
   });
 
-  // Додавання тіней до навбару при скролі
+  // Додавання тіні до навбару при скролі
   const navbar = document.querySelector(".navbar");
   window.addEventListener("scroll", () => {
     if (window.scrollY > 20) {
@@ -54,12 +56,14 @@ async function sendCall(authKey, phoneNumber) {
     });
     const result = await response.json();
     console.log('✅ Результат виклику:', result);
+    alert('✅ Дзвінок успішно надіслано!');
   } catch (error) {
     console.error('❌ Помилка виклику:', error);
+    alert('❌ Помилка при надсиланні дзвінка!');
   }
 }
 
-// 🔀 Відправка запиту на з'єднання
+// 🔀 Відправка запиту на з'єднання номера та схеми
 async function connectNumber(data) {
   try {
     const response = await fetch('https://stepuraserhii-github-io.onrender.com/api/connect', {
@@ -68,24 +72,29 @@ async function connectNumber(data) {
       body: JSON.stringify(data)
     });
     const result = await response.json();
-    console.log('✅ Результат зєднання:', result);
+    console.log('✅ Результат з\'єднання:', result);
+    alert('✅ З\'єднання успішне!');
   } catch (error) {
-    console.error('❌ Помилка зєднання:', error);
+    console.error('❌ Помилка з\'єднання:', error);
+    alert('❌ Помилка при з\'єднанні!');
   }
 }
 
+// Обробник кнопки для першої форми дзвінка
 document.getElementById('callButton1')?.addEventListener('click', () => {
   const authKey = document.getElementById('authKey1').value;
   const phoneNumber = document.getElementById('phoneInput1').value;
   sendCall(authKey, phoneNumber);
 });
 
+// Обробник кнопки для другої форми дзвінка
 document.getElementById('callButton2')?.addEventListener('click', () => {
   const authKey = document.getElementById('authKey2').value;
   const phoneNumber = document.getElementById('phoneInput2').value;
   sendCall(authKey, phoneNumber);
 });
 
+// Обробник кнопки для з'єднання номера і схеми
 document.getElementById('connectButton3')?.addEventListener('click', () => {
   const authKey = document.getElementById('authKey3').value;
   const phoneNumber = document.getElementById('phone3').value;
