@@ -100,8 +100,11 @@ document.getElementById('connectButton3')?.addEventListener('click', () => {
   const phoneNumber = document.getElementById('phone3').value;
   const projectId = document.getElementById('projectId3').value;
   const schemeId = document.getElementById('schemeId3').value;
-  const manager_dst = document.getElementById('direction3').value;
+  let manager_dst = document.getElementById('direction3').value;
   const direction = document.getElementById('callType3').value;
+
+  // 🔥 ПЕРЕКЛЮЧЕННЯ: якщо обрано "Менеджер спочатку", то 0, якщо "Клієнт спочатку" - 1
+  manager_dst = manager_dst === "0" ? 0 : 1;
 
   connectNumber({ authKey, phoneNumber, projectId, schemeId, direction, manager_dst });
 });
