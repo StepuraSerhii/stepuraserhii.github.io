@@ -44,23 +44,6 @@
     </nav>
   </header>
 
-  <!-- 📞 API ІНТЕГРАЦІЯ -->
-  <section class="form-analytics-wrapper">
-    <div class="container form">
-      <h2>Форма виклику #1</h2>
-      <input id="authKey1" placeholder="Введіть Auth-key" type="text" />
-      <input id="phoneInput1" placeholder="Введіть номер телефону" type="text" />
-      <button class="fancy-button" id="callButton1">Зателефонувати</button>
-    </div>
-
-    <div class="container form">
-      <h2>Форма виклику #2</h2>
-      <input id="authKey2" placeholder="Введіть Auth-key" type="text" />
-      <input id="phoneInput2" placeholder="Введіть номер телефону" type="text" />
-      <button class="fancy-button" id="callButton2">Зателефонувати</button>
-    </div>
-  </section>
-
   <!-- 🔀 З'єднання номеру і схеми -->
   <section class="form-analytics-wrapper">
     <div class="container form half-width">
@@ -77,6 +60,38 @@
 
       <label for="schemeId3">Введіть ID схеми:</label>
       <input id="schemeId3" name="schemeId3" type="text" placeholder="ID схеми" required />
+
+      <label for="direction3">Виберіть напрямок дзвінка:</label>
+      <select id="direction3" name="direction3" required>
+        <option value="0">Клієнт спочатку, менеджер після</option>
+        <option value="1">Менеджер спочатку, клієнт після</option>
+      </select>
+
+      <label for="callType3">Виберіть тип дзвінка:</label>
+      <select id="callType3" name="callType3" required>
+        <option value="in">Вхідний</option>
+        <option value="out">Вихідний</option>
+      </select>
+
+      <button class="fancy-button" id="connectButton3">З'єднати</button>
+    </div>
+  </section>
+
+  <section class="form-analytics-wrapper">
+    <div class="container form half-width">
+      <h2>З'єднання номеру і SIP аккаунта</h2>
+
+      <label for="phone3">Введіть номер:</label>
+      <input id="phone3" name="phone3" type="tel" placeholder="+380..." required />
+
+      <label for="authKey3">Введіть Аутх кей:</label>
+      <input id="authKey3" name="authKey3" type="text" placeholder="Ваш Auth-key" required />
+
+      <label for="projectId3">Введіть ID проєкту:</label>
+      <input id="projectId3" name="projectId3" type="text" placeholder="ID проєкту" required />
+
+      <label for="schemeId3">Введіть SIP login:</label>
+      <input id="schemeId3" name="schemeId3" type="text" placeholder="SIP login" required />
 
       <label for="direction3">Виберіть напрямок дзвінка:</label>
       <select id="direction3" name="direction3" required>

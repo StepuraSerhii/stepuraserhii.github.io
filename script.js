@@ -99,12 +99,13 @@ document.getElementById('connectButton3')?.addEventListener('click', () => {
   const authKey = document.getElementById('authKey3').value;
   const phoneNumber = document.getElementById('phone3').value;
   const projectId = document.getElementById('projectId3').value;
-  const schemeId = document.getElementById('schemeId3').value;
+  const schemeId = document.getElementById('schemeId3')?.value || ""; // 🛠 залишаємо як є
+  const sipLogin = document.getElementById('sipLogin3')?.value || ""; // 🛠 якщо буде поле для SIP логіна
   let manager_dst = document.getElementById('direction3').value;
   const direction = document.getElementById('callType3').value;
 
-  // 🔥 ПЕРЕКЛЮЧЕННЯ: якщо обрано "Менеджер спочатку", то 0, якщо "Клієнт спочатку" - 1
-  manager_dst = manager_dst === "0" ? 0 : 1;
+  manager_dst = manager_dst === "0" ? 0 : 1; // Перекладаємо на нормальний вигляд (число)
 
-  connectNumber({ authKey, phoneNumber, projectId, schemeId, direction, manager_dst });
+  // 🔥 Відправляємо ВСІ дані: і schemeId, і sipLogin
+  connectNumber({ authKey, phoneNumber, projectId, schemeId, sipLogin, direction, manager_dst });
 });
