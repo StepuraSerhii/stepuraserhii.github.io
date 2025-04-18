@@ -1,1 +1,112 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <!-- 🌐 МЕТА та ПІДКЛЮЧЕННЯ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Телефонія</title>
 
+  <!-- 🎨 Стилі -->
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/navbar.css">
+  <link rel="stylesheet" href="styles/form.css">
+  <link rel="stylesheet" href="styles/footer.css">
+  <link rel="stylesheet" href="styles/substitution.css">
+
+  <!-- ⚙️ Скрипти -->
+  <script src="script.js" defer></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9H5MHGWCNY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-9H5MHGWCNY');
+  </script>
+
+  <!-- 🆕 СКРИПТ ДЛЯ ЗБИРАННЯ GCLID -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const gclid = params.get('gclid');
+      if (gclid) {
+        // Зберігаємо в локальне сховище браузера
+        localStorage.setItem('gclid', gclid);
+        console.log('GCLID збережено:', gclid);
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <!-- 🛑 Noscript Google Tag Manager -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N8Q4GXSL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- 🔝 НАВІГАЦІЯ -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="burger" id="burger">&#9776;</div>
+        <a href="index.html" class="logo">MyCompany</a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="api.html">API</a></li>
+          <li><a href="substitution.html">Підміна</a></li>
+          <li><a href="#form">Форми</a></li>
+          <li><a href="#contact">Контакти</a></li>
+        </ul>
+        <a href="tel:+380000000000" class="phone-icon" id="phoneIcon">&#9743;</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 📄 ГОЛОВНИЙ ВМІСТ -->
+  <div class="page-container">
+    <h1>Телефонія</h1>
+    <p class="intro-text">
+      Телефонія — це технологія, що дозволяє передавати голосову інформацію через відстань за допомогою телефонних мереж, включаючи VoIP (IP-телефонія).
+    </p>
+
+    <!-- 📊 Аналітика + Форма -->
+    <div class="form-analytics-wrapper">
+
+      <!-- 🔍 Аналітика -->
+      <div class="analytics-text" id="analytics">
+        <h2>Аналітика</h2>
+        <p>Аналітика дозволяє відстежувати ключові метрики, приймати обґрунтовані бізнес-рішення та підвищувати ефективність процесів.</p>
+      </div>
+
+      <!-- 📝 Форма -->
+      <div class="form" id="form">
+        <div class="form-header">
+          <p>Заповніть форму</p>
+        </div>
+        <form>
+          <label for="name">Ваше ім'я:</label>
+          <input type="text" id="name" name="name" placeholder="Введіть ім'я" required />
+      
+          <label for="phone">Номер телефону:</label>
+          <input type="tel" id="phone" name="phone" placeholder="+380..." required />
+      
+          <label for="order">Опис замовлення:</label>
+          <textarea id="order" name="order" placeholder="Що саме вас цікавить?" rows="4" required></textarea>
+      
+          <label for="product">Оберіть послугу:</label>
+          <select id="product" name="product" required>
+            <option value="">-- Оберіть варіант --</option>
+            <option value="analytics">Аналітика</option>
+            <option value="telephony">Телефонія</option>
+            <option value="callback">Коллбек</option>
+          </select>
+      
+          <!-- ✅ Додана кнопка -->
+          <button type="submit" class="fancy-button">Надіслати</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔚 ФУТЕР -->
+  <footer class="footer" id="contact">
+    <p>Зв’яжіться з нами: <a href="tel:+380970000000">+380970000000</a></p>
+  </footer>
+</body>
+</html>
