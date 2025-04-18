@@ -80,32 +80,17 @@ async function connectNumber(data) {
   }
 }
 
-// Обробник кнопки для першої форми дзвінка
-document.getElementById('callButton1')?.addEventListener('click', () => {
-  const authKey = document.getElementById('authKey1').value;
-  const phoneNumber = document.getElementById('phoneInput1').value;
-  sendCall(authKey, phoneNumber);
-});
-
-// Обробник кнопки для другої форми дзвінка
-document.getElementById('callButton2')?.addEventListener('click', () => {
-  const authKey = document.getElementById('authKey2').value;
-  const phoneNumber = document.getElementById('phoneInput2').value;
-  sendCall(authKey, phoneNumber);
-});
-
 // Обробник кнопки для з'єднання номера і схеми
-document.getElementById('connectButton3')?.addEventListener('click', () => {
-  const authKey = document.getElementById('authKey3').value;
-  const phoneNumber = document.getElementById('phone3').value;
-  const projectId = document.getElementById('projectId3').value;
-  const schemeId = document.getElementById('schemeId3')?.value || ""; // 🛠 залишаємо як є
-  const sipLogin = document.getElementById('sipLogin3')?.value || ""; // 🛠 якщо буде поле для SIP логіна
-  let manager_dst = document.getElementById('direction3').value;
-  const direction = document.getElementById('callType3').value;
+document.getElementById('connectButton4')?.addEventListener('click', () => {
+  const authKey = document.getElementById('authKey4').value;
+  const phoneNumber = document.getElementById('phone4').value;
+  const projectId = document.getElementById('projectId4').value;
+  const sipLogin = document.getElementById('sipLogin4').value;
+  let manager_dst = document.getElementById('direction4').value;
+  const direction = document.getElementById('callType4').value;
 
-  manager_dst = manager_dst === "0" ? 0 : 1; // Перекладаємо на нормальний вигляд (число)
+  manager_dst = manager_dst === "0" ? 0 : 1;
 
-  // 🔥 Відправляємо ВСІ дані: і schemeId, і sipLogin
-  connectNumber({ authKey, phoneNumber, projectId, schemeId, sipLogin, direction, manager_dst });
+  // Викликаємо функцію з SIP акаунтом
+  connectNumber({ authKey, phoneNumber, projectId, sipLogin, direction, manager_dst });
 });
