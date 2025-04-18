@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // 📞 Відправка запиту на простий дзвінок
 async function sendCall(authKey, phoneNumber) {
   try {
-    const response = await fetch('https://твій-домен-на-рендері.onrender.com/api/call', {
+    const response = await fetch('https://stepuraserhii-github-io.onrender.com/api/call', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ authKey, phoneNumber })
@@ -62,7 +62,7 @@ async function sendCall(authKey, phoneNumber) {
 // 🔀 Відправка запиту на з'єднання
 async function connectNumber(data) {
   try {
-    const response = await fetch('https://твій-домен-на-рендері.onrender.com/api/connect', {
+    const response = await fetch('https://stepuraserhii-github-io.onrender.com/api/connect', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
