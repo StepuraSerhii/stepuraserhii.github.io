@@ -25,7 +25,7 @@ app.post('/api/call', async (req, res) => {
     params: {
       callee_type: "scheme",
       caller: phoneNumber,
-      callee: "231146", // Тут залишається заглушка або потім винесемо в налаштування
+      callee: "231146", // Можна змінити при потребі
       projectId: "171946",
       direction: "out",
       manager_dst: "0"
@@ -53,7 +53,7 @@ app.post('/api/call', async (req, res) => {
 
 // 🔀 З'єднання номеру і схеми
 app.post('/api/connect', async (req, res) => {
-  let { phoneNumber, authKey, projectId, schemeId, direction, callType } = req.body;
+  let { phoneNumber, authKey, projectId, schemeId, direction, manager_dst } = req.body;
 
   console.log("📥 Отримано запит connect:");
   console.log(req.body);
@@ -69,8 +69,8 @@ app.post('/api/connect', async (req, res) => {
       caller: phoneNumber,
       callee: schemeId,
       projectId: projectId,
-      direction: callType,
-      manager_dst: direction
+      direction: direction,         // 'in' або 'out'
+      manager_dst: Number(manager_dst) // 0 або 1
     }
   };
 
