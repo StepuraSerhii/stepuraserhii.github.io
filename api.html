@@ -4,13 +4,14 @@
   <!-- 🌐 МЕТА та ПІДКЛЮЧЕННЯ -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Телефонія</title>
+  <title>Support Testing</title>
   <!-- 🎨 Стилі -->
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/navbar.css">
-  <link rel="stylesheet" href="styles/form.css">
+  <link rel="stylesheet" href="styles/api.css">
   <link rel="stylesheet" href="styles/footer.css">
   <link rel="stylesheet" href="styles/substitution.css">
+  <link rel="icon" type="image/png" href="images/index_logo/logo.png">
   <!-- ⚙️ Скрипти -->
   <script defer src="script.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9H5MHGWCNY"></script>
@@ -44,41 +45,39 @@
     </nav>
   </header>
 
-  <!-- 🔀 З'єднання номеру і схеми -->
-  <section class="form-analytics-wrapper">
-    <div class="container form half-width">
+  <section class="api-forms-wrapper">
+  
+    <div class="api-form-container">
       <h2>З'єднання номеру і схеми переадресації</h2>
-
+  
       <label for="phone3">Введіть номер:</label>
       <input id="phone3" name="phone3" type="tel" placeholder="+380..." required />
-
+  
       <label for="authKey3">Введіть Аутх кей:</label>
       <input id="authKey3" name="authKey3" type="text" placeholder="Ваш Auth-key" required />
-
+  
       <label for="projectId3">Введіть ID проєкту:</label>
       <input id="projectId3" name="projectId3" type="text" placeholder="ID проєкту" required />
-
+  
       <label for="schemeId3">Введіть ID схеми:</label>
       <input id="schemeId3" name="schemeId3" type="text" placeholder="ID схеми" required />
-
+  
       <label for="direction3">Виберіть напрямок дзвінка:</label>
       <select id="direction3" name="direction3" required>
-        <option value="0">Клієнт спочатку, менеджер після</option>
-        <option value="1">Менеджер спочатку, клієнт після</option>
+        <option value="0">Клієнт &#x27A1; Схема</option>
+        <option value="1">Схема &#x27A1; Клієнт</option>
       </select>
-
+  
       <label for="callType3">Виберіть тип дзвінка:</label>
       <select id="callType3" name="callType3" required>
         <option value="in">Вхідний</option>
         <option value="out">Вихідний</option>
       </select>
-
-      <button class="fancy-button" id="connectButton3">З'єднати</button>
+  
+      <button class="fancy-button" id="connectButton3">З'єднати з схемою</button>
     </div>
-  </section>
-
-  <section class="form-analytics-wrapper">
-    <div class="container form half-width">
+  
+    <div class="api-form-container">
       <h2>З'єднання номеру і SIP акаунта</h2>
   
       <label for="phone4">Введіть номер:</label>
@@ -95,8 +94,8 @@
   
       <label for="direction4">Виберіть напрямок дзвінка:</label>
       <select id="direction4" name="direction4" required>
-        <option value="0">Клієнт спочатку, менеджер після</option>
-        <option value="1">Менеджер спочатку, клієнт після</option>
+        <option value="0">Клієнт &#x27A1; Менеджер</option>
+        <option value="1">Менеджер &#x27A1; Клієнт</option>
       </select>
   
       <label for="callType4">Виберіть тип дзвінка:</label>
@@ -107,6 +106,7 @@
   
       <button class="fancy-button" id="connectButton4">З'єднати через SIP</button>
     </div>
+  
   </section>
 
   <!-- 🔚 ФУТЕР -->
