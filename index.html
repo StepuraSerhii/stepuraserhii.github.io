@@ -22,6 +22,19 @@
     gtag('js', new Date());
     gtag('config', 'G-9H5MHGWCNY');
   </script>
+
+  <!-- 🆕 СКРИПТ ДЛЯ ЗБИРАННЯ GCLID -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const gclid = params.get('gclid');
+      if (gclid) {
+        // Зберігаємо в локальне сховище браузера
+        localStorage.setItem('gclid', gclid);
+        console.log('GCLID збережено:', gclid);
+      }
+    });
+  </script>
 </head>
 
 <body>
