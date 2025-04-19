@@ -54,6 +54,16 @@ app.post('/api/call', async (req, res) => {
 });
 
 // 🔀 З'єднання номеру і SIP акаунта
+const express = require('express');
+const cors = require('cors');
+const fetch = require('node-fetch');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+app.use(cors());
+app.use(express.json());
+
 app.post('/api/connect', async (req, res) => {
   let { phoneNumber, authKey, projectId, schemeId, sipLogin, direction, manager_dst } = req.body;
 
@@ -106,4 +116,9 @@ app.post('/api/connect', async (req, res) => {
     console.error("❌ Помилка при запиті до Ringostat:", error);
     res.status(500).json({ error: "Серверна помилка при обробці запиту" });
   }
+});
+
+// 🛠 ВАЖЛИВО: запуск сервера
+app.listen(PORT, () => {
+  console.log(`✅ Сервер запущено на порту ${PORT}`);
 });
