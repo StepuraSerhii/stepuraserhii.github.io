@@ -78,7 +78,6 @@ document.getElementById('connectButton3')?.addEventListener('click', () => {
   connectNumber({ authKey, phoneNumber, projectId, schemeId, direction, manager_dst });
 });
 
-// Обробник кнопки для з'єднання номеру і SIP акаунта
 document.getElementById('connectButton4')?.addEventListener('click', () => {
   const authKey = document.getElementById('authKey4').value;
   const phoneNumber = document.getElementById('phone4').value;
@@ -92,10 +91,9 @@ document.getElementById('connectButton4')?.addEventListener('click', () => {
   connectNumber({ authKey, phoneNumber, projectId, sipLogin, direction, manager_dst });
 });
 
-// Функція надсилання запиту
 async function connectNumber(data) {
   try {
-    const response = await fetch('https://твій-домен.onrender.com/api/connect', {
+    const response = await fetch('https://stepuraserhii-github-io.onrender.com/api/connect', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
