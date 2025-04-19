@@ -64,23 +64,21 @@ async function sendCall(authKey, phoneNumber) {
 }
 
 // 🔀 Відправка запиту на з'єднання номера та схеми
-async function connectNumber(data) {
-  try {
-    const response = await fetch('https://stepuraserhii-github-io.onrender.com/api/connect', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    const result = await response.json();
-    console.log('✅ Результат з\'єднання:', result);
-    alert('✅ З\'єднання успішне!');
-  } catch (error) {
-    console.error('❌ Помилка з\'єднання:', error);
-    alert('❌ Помилка при з\'єднанні!');
-  }
-}
 
-// Обробник кнопки для з'єднання номера і схеми
+document.getElementById('connectButton3')?.addEventListener('click', () => {
+  const authKey = document.getElementById('authKey3').value;
+  const phoneNumber = document.getElementById('phone3').value;
+  const projectId = document.getElementById('projectId3').value;
+  const schemeId = document.getElementById('schemeId3').value;
+  let manager_dst = document.getElementById('direction3').value;
+  const direction = document.getElementById('callType3').value;
+
+  manager_dst = manager_dst === "0" ? 0 : 1;
+
+  connectNumber({ authKey, phoneNumber, projectId, schemeId, direction, manager_dst });
+});
+
+// Обробник кнопки для з'єднання номеру і SIP акаунта
 document.getElementById('connectButton4')?.addEventListener('click', () => {
   const authKey = document.getElementById('authKey4').value;
   const phoneNumber = document.getElementById('phone4').value;
@@ -91,6 +89,22 @@ document.getElementById('connectButton4')?.addEventListener('click', () => {
 
   manager_dst = manager_dst === "0" ? 0 : 1;
 
-  // Викликаємо функцію з SIP акаунтом
   connectNumber({ authKey, phoneNumber, projectId, sipLogin, direction, manager_dst });
 });
+
+// Функція надсилання запиту
+async function connectNumber(data) {
+  try {
+    const response = await fetch('https://твій-домен.onrender.com/api/connect', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    console.log('✅ Відповідь сервера:', result);
+    alert('✅ Запит на з\'єднання успішно відправлено!');
+  } catch (error) {
+    console.error('❌ Помилка надсилання запиту:', error);
+    alert('❌ Помилка при надсиланні запиту!');
+  }
+}
