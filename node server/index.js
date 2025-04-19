@@ -65,14 +65,14 @@ app.post('/api/connect', async (req, res) => {
   let calleeType = '';
   let callee = '';
 
-  if (sipLogin) {
-    calleeType = 'sip_account';
-    callee = sipLogin;
-  } else if (schemeId) {
+  if (schemeId) {
     calleeType = 'scheme';
     callee = schemeId;
+  } else if (sipLogin) {
+    calleeType = 'sip_account';
+    callee = sipLogin;
   } else {
-    return res.status(400).json({ error: "Не передано ні sipLogin, ні schemeId" });
+    return res.status(400).json({ error: "Не передано ні schemeId, ні sipLogin" });
   }
 
   const payload = {
