@@ -55,21 +55,34 @@ app.post('/api/call', async (req, res) => {
 
 // 🔀 З'єднання номеру і SIP акаунта
 app.post('/api/connect', async (req, res) => {
-  let { phoneNumber, authKey, projectId, sipLogin, direction, manager_dst } = req.body;
+  let { phoneNumber, authKey, projectId, schemeId, sipLogin, direction, manager_dst } = req.body;
 
-  console.log("📥 Отримано запит connect:");
+  console.log("📥 Отримано запит на з'єднання:");
   console.log(req.body);
 
   phoneNumber = phoneNumber.replace(/\D/g, '');
+
+  let calleeType = '';
+  let callee = '';
+
+  if (sipLogin) {
+    calleeType = 'sip_account';
+    callee = sipLogin;
+  } else if (schemeId) {
+    calleeType = 'scheme';
+    callee = schemeId;
+  } else {
+    return res.status(400).json({ error: "Не передано ні sipLogin, ні schemeId" });
+  }
 
   const payload = {
     jsonrpc: "2.0",
     id: 1,
     method: "Api\\V2\\Callback.external",
     params: {
-      callee_type: "sip_account",    // Тепер правильно - через SIP акаунт
+      callee_type: calleeType,
       caller: phoneNumber,
-      callee: sipLogin,
+      callee: callee,
       projectId: projectId,
       direction: direction,
       manager_dst: Number(manager_dst)
@@ -87,15 +100,10 @@ app.post('/api/connect', async (req, res) => {
     });
 
     const data = await response.json();
-    console.log("📥 Відповідь від Ringostat (connect):", data);
+    console.log("📥 Відповідь від Ringostat:", data);
     res.json(data);
   } catch (error) {
-    console.error("❌ Помилка сервера (connect):", error);
-    res.status(500).json({ error: "Серверна помилка при запиті" });
+    console.error("❌ Помилка при запиті до Ringostat:", error);
+    res.status(500).json({ error: "Серверна помилка при обробці запиту" });
   }
-});
-
-// ✅ ВАЖЛИВО: запускаємо сервер і слухаємо PORT
-app.listen(PORT, () => {
-  console.log(`✅ Сервер працює на порту ${PORT}`);
 });
