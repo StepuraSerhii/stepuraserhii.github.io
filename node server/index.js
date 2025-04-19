@@ -16,21 +16,19 @@ app.post('/api/call', async (req, res) => {
   console.log("📞 Номер телефону:", phoneNumber);
   console.log("🔑 Ключ авторизації:", authKey);
 
-  // Очищення номера від непотрібних символів
   phoneNumber = phoneNumber.replace(/\D/g, '');
 
-  // 🔥 Створюємо payload для виклику (ти забув це в себе!)
   const payload = {
     jsonrpc: "2.0",
     id: 1,
     method: "Api\\V2\\Callback.external",
     params: {
-      callee_type: "scheme",      // Тут через схему (стара логіка)
+      callee_type: "scheme",
       caller: phoneNumber,
-      callee: "231146",           // ID схеми (можна винести у змінну потім)
-      projectId: "171946",        // ID проєкту
-      direction: "out",           // Тип дзвінка
-      manager_dst: "0"            // Менеджер перший
+      callee: "231146",    // ID схеми
+      projectId: "171946", // ID проєкту
+      direction: "out",    // Тип дзвінка
+      manager_dst: "0"     // Менеджер перший
     }
   };
 
@@ -53,21 +51,11 @@ app.post('/api/call', async (req, res) => {
   }
 });
 
-// 🔀 З'єднання номеру і SIP акаунта
-const express = require('express');
-const cors = require('cors');
-const fetch = require('node-fetch');
-
-const app = express();
-const PORT = process.env.PORT || 3001;
-
-app.use(cors());
-app.use(express.json());
-
+// 🔀 З'єднання номеру і SIP акаунта або СХЕМИ
 app.post('/api/connect', async (req, res) => {
   let { phoneNumber, authKey, projectId, schemeId, sipLogin, direction, manager_dst } = req.body;
 
-  console.log("📥 Отримано запит на з'єднання:");
+  console.log("📥 Отримано запит connect:");
   console.log(req.body);
 
   phoneNumber = phoneNumber.replace(/\D/g, '');
@@ -110,7 +98,7 @@ app.post('/api/connect', async (req, res) => {
     });
 
     const data = await response.json();
-    console.log("📥 Відповідь від Ringostat:", data);
+    console.log("📥 Відповідь від Ringostat (connect):", data);
     res.json(data);
   } catch (error) {
     console.error("❌ Помилка при запиті до Ringostat:", error);
@@ -118,7 +106,7 @@ app.post('/api/connect', async (req, res) => {
   }
 });
 
-// 🛠 ВАЖЛИВО: запуск сервера
+// 🛠 Запуск сервера
 app.listen(PORT, () => {
   console.log(`✅ Сервер запущено на порту ${PORT}`);
 });
