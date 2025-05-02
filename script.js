@@ -1,21 +1,21 @@
 // Підключення зовнішнього скрипта Ringostat для аналітики
-(function (d, s, u, e, p) {
-  p = d.getElementsByTagName(s)[0];
-  e = d.createElement(s);
-  e.async = 1;
-  e.src = u;
-  p.parentNode.insertBefore(e, p);
-})(document, 'script', 'https://script.ringostat.com/v4/1b/1b754cb63e621f14d71ac9233d0ba04a7fd8a22a.js');
+(async function() {
+  const blockedIPs = ['176.104.184.135'];
+  try {
+      const res = await fetch('https://api.ipify.org?format=json');
+      const ip = (await res.json()).ip;
+      if (blockedIPs.includes(ip)) return;
 
-// Очікуємо завантаження Ringostat-аналітики і відправляємо pageview
-var pw = function () {
-  if (typeof (ringostatAnalytics) === "undefined") {
-    setTimeout(pw, 100); // Якщо аналітика ще не готова — повторюємо через 100 мс
-  } else {
-    ringostatAnalytics.sendHit('pageview');
-  }
-};
-pw();
+      (function (d, s, u, e, p) {
+          p = d.getElementsByTagName(s)[0];
+          e = d.createElement(s);
+          e.async = 1;
+          e.src = u;
+          p.parentNode.insertBefore(e, p);
+      })(document, 'script', 'https://script.ringostat.com/v4/1b/1b754cb63e621f14d71ac9233d0ba04a7fd8a22a.js');
+
+  } catch (e) {}
+})();
 
 // Запускаємо функції після завантаження сторінки
 document.addEventListener("DOMContentLoaded", () => {
