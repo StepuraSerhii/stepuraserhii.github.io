@@ -1,21 +1,58 @@
 // Підключення зовнішнього скрипта Ringostat для аналітики
-(function (d, s, u, e, p) {
-  p = d.getElementsByTagName(s)[0];
-  e = d.createElement(s);
-  e.async = 1;
-  e.src = u;
-  p.parentNode.insertBefore(e, p);
-})(document, 'script', 'https://script.ringostat.com/v4/1b/1b754cb63e621f14d71ac9233d0ba04a7fd8a22a.js');
+(function () {
+  var pathname = window.location.pathname;
 
-// Очікуємо завантаження Ringostat-аналітики і відправляємо pageview
-var pw = function () {
-  if (typeof (ringostatAnalytics) === "undefined") {
-    setTimeout(pw, 100); // Якщо аналітика ще не готова — повторюємо через 100 мс
-  } else {
-    ringostatAnalytics.sendHit('pageview');
-  }
-};
-pw();
+  window.ringostatSettings = {
+    noGa: true,
+    observeDOM: false,
+    browserGeolocation: false,
+    callbackSettings: {
+      delay: false,
+      CallbackOff: false,
+      autoFormOff: false,
+      hideCallbackButton: false
+    },
+    customFormDataTracking: {
+      isActive: false,
+      startCallbackOnSubmitForm: false,
+      callbackDuringBusinessHours: true,
+      phoneInputName: ["phone", "tel", "telephone"],
+      pagesWhiteList: [],
+      pagesBlackList: [],
+      fieldsBlackList: []
+    },
+    callback: function (data) {},
+    messengers: {
+      chat: {
+        bot_name: "Tiny",
+        bot_id: "",
+        enabled: pathname === "/api" ? 0 : 1
+      },
+      telegram: {
+        bot_name: "RingostatTiny_bot",
+        bot_id: "",
+        enabled: 1
+      }
+    }
+  };
+
+  (function (d, s, u, e, p) {
+    p = d.getElementsByTagName(s)[0];
+    e = d.createElement(s);
+    e.async = 1;
+    e.src = u;
+    p.parentNode.insertBefore(e, p);
+  })(document, 'script', 'https://script.ringostat.com/v4/1b/1b754cb63e621f14d71ac9233d0ba04a7fd8a22a.js');
+
+  var pw = function () {
+    if (typeof (ringostatAnalytics) === "undefined") {
+      setTimeout(pw, 100);
+    } else {
+      ringostatAnalytics.sendHit('pageview');
+    }
+  };
+  pw();
+})();
 
 // Запускаємо функції після завантаження сторінки
 document.addEventListener("DOMContentLoaded", () => {
