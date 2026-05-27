@@ -17,7 +17,7 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=332185547461661&ev=PageView&noscript=1"
 /></noscript>
-  <!-- End Meta Pixel Code -->  
+  <!-- End Meta Pixel Code -->
   <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -28,7 +28,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <!-- 🌐 МЕТА та ПІДКЛЮЧЕННЯ -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support Testing</title>
+  <title>Support Testing — Телефонія &amp; Аналітика</title>
 
   <!-- 🎨 Стилі -->
   <link rel="stylesheet" href="styles/base.css">
@@ -55,10 +55,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       const params = new URLSearchParams(window.location.search);
       const gclid = params.get('gclid');
       if (gclid) {
-        // Зберігаємо в локальне сховище браузера
         localStorage.setItem('gclid', gclid);
         console.log('GCLID збережено:', gclid);
       }
+      // Footer year
+      const footer = document.querySelector('.footer');
+      if (footer) footer.setAttribute('data-year', new Date().getFullYear());
     });
   </script>
 </head>
@@ -86,9 +88,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <!-- 📄 ГОЛОВНИЙ ВМІСТ -->
   <div class="page-container">
-    <h1>Телефонія</h1>
+    <h1>Телефонія<br>без зайвого&nbsp;шуму.</h1>
     <p class="intro-text">
-      Телефонія — це технологія, що дозволяє передавати голосову інформацію через відстань за допомогою телефонних мереж, включаючи VoIP (IP-телефонія).
+      Голосовий зв’язок, який працює тоді, коли він потрібен. VoIP-інфраструктура, аналітика дзвінків і ясна картина того, звідки приходять ваші клієнти.
     </p>
 
     <!-- 📊 Аналітика + Форма -->
@@ -96,8 +98,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <!-- 🔍 Аналітика -->
       <div class="analytics-text" id="analytics">
-        <h2>Аналітика</h2>
-        <p>Аналітика дозволяє відстежувати ключові метрики, приймати обґрунтовані бізнес-рішення та підвищувати ефективність процесів.</p>
+        <h2>Аналітика, що відповідає на «чому»</h2>
+        <p>Відстежуйте ключові метрики, бачте джерела трафіку, оцінюйте конверсії і приймайте рішення, які насправді рухають бізнес уперед.</p>
       </div>
 
       <!-- 📝 Форма -->
@@ -106,24 +108,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <p>Заповніть форму</p>
         </div>
         <form>
-          <label for="name">Ваше ім'я:</label>
-          <input type="text" id="name" name="name" placeholder="Введіть ім'я" required />
-      
-          <label for="phone">Номер телефону:</label>
+          <label for="name">Ваше ім'я</label>
+          <input type="text" id="name" name="name" placeholder="Іван" required />
+
+          <label for="phone">Номер телефону</label>
           <input type="tel" id="phone" name="phone" placeholder="+380..." required />
-      
-          <label for="order">Опис замовлення:</label>
+
+          <label for="order">Опис замовлення</label>
           <textarea id="order" name="order" placeholder="Що саме вас цікавить?" rows="4" required></textarea>
-      
-          <label for="product">Оберіть послугу:</label>
+
+          <label for="product">Оберіть послугу</label>
           <select id="product" name="product" required>
-            <option value="">-- Оберіть варіант --</option>
+            <option value="">— Оберіть варіант —</option>
             <option value="analytics">Аналітика</option>
             <option value="telephony">Телефонія</option>
             <option value="callback">Коллбек</option>
           </select>
-      
-          <!-- ✅ Додана кнопка -->
+
           <button type="submit" class="fancy-button">Надіслати</button>
         </form>
       </div>

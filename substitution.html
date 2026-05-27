@@ -4,7 +4,7 @@
   <!-- 🌐 МЕТА та ПІДКЛЮЧЕННЯ -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support Testing</title>
+  <title>Support Testing — Підміна номерів</title>
 
   <!-- 🎨 Стилі -->
   <link rel="stylesheet" href="styles/base.css">
@@ -22,6 +22,10 @@
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-9H5MHGWCNY');
+    document.addEventListener('DOMContentLoaded', () => {
+      const footer = document.querySelector('.footer');
+      if (footer) footer.setAttribute('data-year', new Date().getFullYear());
+    });
   </script>
 </head>
 

@@ -1,28 +1,46 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
   <title>Дзвінок</title>
   <style>
-    body {
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&family=Inter+Tight:wght@600&display=swap');
+    html, body {
       margin: 0;
+      height: 100%;
+      background: transparent;
+    }
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      font-family: sans-serif;
+      font-family: 'Inter Tight', system-ui, sans-serif;
     }
     a {
       text-decoration: none;
-      font-size: 1.2rem;
-      color: #000;
-      display: flex;
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: #0e0e12;
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border: 1px solid red;
-      border-radius: 8px;
+      gap: 10px;
+      padding: 12px 22px;
+      border: 1.5px solid #0e0e12;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 5px 0 0 #ff5b22;
+      transition: transform 0.2s cubic-bezier(0.16,1,0.3,1),
+                  box-shadow 0.2s cubic-bezier(0.16,1,0.3,1);
+    }
+    a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 0 #ff5b22;
+    }
+    a:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 0 #ff5b22;
     }
   </style>
 </head>
