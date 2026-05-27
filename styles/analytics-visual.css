@@ -373,7 +373,7 @@
 
 /* Live call ticker chip floating in */
 .analytics-visual__chart::after {
-  content: "&#128153;&#128155;";
+  content: "\1F499 \1F49B";
   position: absolute;
   right: 12px;
   bottom: 10px;
