@@ -373,7 +373,7 @@
 
 /* Live call ticker chip floating in */
 .analytics-visual__chart::after {
-  content: "📞 +380 97 · KEYWORD: «телефонія»";
+  content: "&#128153;&#128155;";
   position: absolute;
   right: 12px;
   bottom: 10px;
