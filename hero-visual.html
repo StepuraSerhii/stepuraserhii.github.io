@@ -1,0 +1,62 @@
+<!--
+  HERO-VISUAL · самостійний фрагмент
+  ────────────────────────────────────────────
+  Підключення:
+    <link rel="stylesheet" href="styles/hero-visual.css">
+
+  Як вставити: помістити нижче поряд з <h1> і <p class="intro-text">,
+  обгорнувши пару текст+візуал в <div class="hero-grid">…</div>.
+  Скрипти НЕ потрібні — анімація чисто CSS.
+-->
+
+<aside class="hero-visual" aria-hidden="true">
+
+  <span class="hero-visual__label">LIVE · VOICE NODE</span>
+  <span class="hero-visual__counter">CH · 047</span>
+
+  <!-- travelling sine wave -->
+  <svg class="hero-visual__wave" viewBox="0 0 460 60" preserveAspectRatio="none">
+    <path d="M0,30 Q57,0 115,30 T230,30 T345,30 T460,30" />
+  </svg>
+
+  <div class="hero-visual__stage">
+
+    <!-- expanding radar rings -->
+    <div class="hero-visual__rings">
+      <span class="hero-visual__ring"></span>
+      <span class="hero-visual__ring"></span>
+      <span class="hero-visual__ring"></span>
+    </div>
+
+    <!-- rotating orbits -->
+    <div class="hero-visual__orbit"></div>
+    <div class="hero-visual__orbit hero-visual__orbit--inner"></div>
+
+    <!-- central handset node -->
+    <div class="hero-visual__node">
+      <svg class="hero-visual__icon" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07
+                 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18
+                 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81
+                 a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27
+                 a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72
+                 A2 2 0 0 1 22 16.92z"/>
+      </svg>
+    </div>
+
+  </div>
+
+  <!-- glass info chips -->
+  <div class="hero-visual__chip">Київстар · +380 97</div>
+  <div class="hero-visual__chip hero-visual__chip--alt">SIP-101 · OK</div>
+
+  <!-- bottom equalizer -->
+  <div class="hero-visual__eq">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+</aside>
