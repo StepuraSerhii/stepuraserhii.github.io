@@ -1,122 +1,220 @@
 /* ============================================
-   API page — twin terminal-style form cards
+   API page — compact, scalable form cards
+   Працює на змінних дизайн-системи проєкту:
+   --ink --paper --accent --accent-2 --font-mono
+   --radius-* --shadow-pop --ease
    ============================================ */
 
-.api-forms-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+/* ---- Заголовок секції ---- */
+.api-console {
   max-width: 1200px;
   margin: 0 auto;
   padding: 80px 28px 60px;
 }
 
+.api-console__head {
+  max-width: 720px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.api-console__eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 6px 14px;
+  border: 1px solid rgba(255,91,34,0.35);
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+
+.api-console__title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  margin: 0 0 14px;
+}
+
+.api-console__lead {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  opacity: 0.72;
+  margin: 0;
+}
+
+/* ---- Сітка карток ---- */
+.api-forms-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;            /* картки не розтягуються по висоті сусіда */
+}
+
+/* ---- Картка форми ---- */
 .api-form-container {
   position: relative;
   background: var(--ink);
   color: var(--paper);
-  padding: 28px 28px 30px;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(244,241,234,0.08);
   box-shadow: var(--shadow-pop);
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
-  transition: transform 0.4s var(--ease);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
 
 .api-form-container:hover { transform: translateY(-3px); }
 
-/* Index labels */
-.api-form-container::before {
-  content: "API · 01";
-  position: absolute;
-  top: 22px;
-  right: 26px;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.api-form-container:nth-of-type(2)::before { content: "API · 02"; color: var(--accent-2); }
-
-/* Animated top stripe */
+/* Анімована верхня смужка */
 .api-form-container::after {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
   background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  z-index: 2;
 }
 .api-form-container:nth-of-type(2)::after {
   background: linear-gradient(90deg, var(--accent-2), var(--accent));
 }
 
-.api-form-container h2 {
+/* ---- Клікабельний заголовок (toggle) ---- */
+.api-form-toggle {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 24px 26px;
+  cursor: pointer;
+  position: relative;
+}
+
+.api-form-toggle::before {
+  content: "API · 01";
+  position: absolute;
+  top: 14px;
+  right: 26px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.85;
+}
+.api-form-container:nth-of-type(2) .api-form-toggle::before {
+  content: "API · 02";
+  color: var(--accent-2);
+}
+
+.api-form-toggle h2 {
   color: var(--paper);
   text-align: left;
-  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
-  margin: 18px 0 24px;
-  padding-right: 90px;
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  line-height: 1.25;
+  margin: 12px 0 0;
+  padding-right: 70px;
 }
 
-.api-form-container label {
+.api-form-chev {
+  flex: 0 0 auto;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--accent);
+  transform: rotate(90deg);          /* вказує вниз = відкрито */
+  transition: transform 0.35s var(--ease);
+}
+.api-form-container:nth-of-type(2) .api-form-chev { color: var(--accent-2); }
+
+.api-form-container[data-open="false"] .api-form-chev {
+  transform: rotate(0deg);           /* вправо = згорнуто */
+}
+
+/* ---- Тіло форми (згортається) ---- */
+.api-form-body {
+  padding: 0 26px 28px;
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.4s var(--ease),
+              opacity 0.3s var(--ease),
+              padding 0.4s var(--ease);
+}
+.api-form-container[data-open="false"] .api-form-body {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+}
+
+/* ---- Сітка полів усередині форми: 2 колонки ---- */
+.api-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 16px;
+  min-height: 0;                     /* для коректної анімації grid-template-rows */
+  overflow: hidden;
+}
+
+.api-field { display: flex; flex-direction: column; min-width: 0; }
+.api-field--full { grid-column: 1 / -1; }   /* поля на всю ширину (номер, auth) */
+
+.api-field label {
   font-family: var(--font-mono);
   font-weight: 400;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(244,241,234,0.7);
-  margin: 10px 0 6px;
+  color: rgba(244,241,234,0.65);
+  margin: 0 0 6px;
 }
 
-.api-form-container input,
-.api-form-container textarea,
-.api-form-container select {
-  padding: 12px 14px;
-  margin-bottom: 8px;
-  font-size: 0.95rem;
+.api-field input,
+.api-field select {
+  padding: 11px 13px;
+  font-size: 0.92rem;
   font-family: var(--font-mono);
   background: rgba(244,241,234,0.06);
   color: var(--paper);
   border: 1px solid rgba(244,241,234,0.18);
   border-radius: var(--radius-sm);
   width: 100%;
-  transition: border-color 0.25s var(--ease), background 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  transition: border-color 0.25s var(--ease),
+              background 0.25s var(--ease),
+              box-shadow 0.25s var(--ease);
 }
 
-.api-form-container input::placeholder,
-.api-form-container textarea::placeholder {
-  color: rgba(244,241,234,0.4);
-}
+.api-field input::placeholder { color: rgba(244,241,234,0.4); }
 
-.api-form-container input:focus,
-.api-form-container textarea:focus,
-.api-form-container select:focus {
+.api-field input:focus,
+.api-field select:focus {
   outline: none;
   border-color: var(--accent);
   background: rgba(244,241,234,0.1);
   box-shadow: 0 0 0 3px rgba(255,91,34,0.18);
 }
 
-.api-form-container select {
+.api-field select {
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23f4f1ea' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 16px center;
-  padding-right: 40px;
+  background-position: right 14px center;
+  padding-right: 38px;
   cursor: pointer;
 }
+.api-field select option { background: var(--ink); color: var(--paper); }
 
-.api-form-container select option { background: var(--ink); color: var(--paper); }
-
-.api-form-container .fancy-button {
-  margin-top: 18px;
+/* ---- Кнопка ---- */
+.api-form-body .fancy-button {
+  margin-top: 22px;
+  width: 100%;
   background: var(--accent);
   color: var(--paper);
-  padding: 16px 22px;
-  font-size: 0.82rem;
+  padding: 15px 22px;
+  font-size: 0.8rem;
   font-family: var(--font-mono);
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -125,35 +223,36 @@
   border-radius: var(--radius-sm);
   cursor: pointer;
   box-shadow: 0 6px 0 0 rgba(244,241,234,0.08);
-  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.3s var(--ease);
+  transition: transform 0.2s var(--ease),
+              box-shadow 0.2s var(--ease),
+              background 0.3s var(--ease);
 }
+.api-form-container:nth-of-type(2) .fancy-button { background: var(--accent-2); }
 
-.api-form-container:nth-of-type(2) .fancy-button {
-  background: var(--accent-2);
-}
-
-.api-form-container .fancy-button::after {
+.api-form-body .fancy-button::after {
   content: " →";
   display: inline-block;
   transition: transform 0.3s var(--ease);
 }
-
-.api-form-container .fancy-button:hover {
+.api-form-body .fancy-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 0 0 rgba(244,241,234,0.08);
 }
-.api-form-container .fancy-button:hover::after { transform: translateX(6px); }
-.api-form-container .fancy-button:active {
+.api-form-body .fancy-button:hover::after { transform: translateX(6px); }
+.api-form-body .fancy-button:active {
   transform: translateY(2px);
   box-shadow: 0 2px 0 0 rgba(244,241,234,0.08);
 }
 
+/* ---- Адаптив ---- */
 @media (max-width: 850px) {
-  .api-forms-wrapper {
-    grid-template-columns: 1fr;
-    gap: 26px;
-    padding: 48px 18px 40px;
-  }
-  .api-form-container { padding: 24px 20px 26px; }
-  .api-form-container h2 { padding-right: 80px; }
+  .api-console { padding: 48px 18px 40px; }
+  .api-forms-wrapper { grid-template-columns: 1fr; gap: 22px; }
+  .api-form-toggle { padding: 22px 20px; }
+  .api-form-toggle h2 { padding-right: 64px; }
+  .api-form-body { padding: 0 20px 24px; }
+}
+
+@media (max-width: 420px) {
+  .api-row { grid-template-columns: 1fr; }   /* на дуже вузьких — 1 колонка */
 }
