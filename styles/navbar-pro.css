@@ -1,0 +1,416 @@
+/* =====================================================
+   NAVBAR PRO — premium overlay
+   #1 magnetic capsule  ·  #3 full-screen mobile menu
+   #5 live status pill  ·  #6 scroll-aware navbar
+   Layered on top of navbar.css — never replaces it.
+   ===================================================== */
+
+/* ---------------------------------------------------
+   #6 SCROLL-AWARE NAVBAR
+   --------------------------------------------------- */
+.navbar {
+  transition:
+    height 0.35s var(--ease),
+    transform 0.4s var(--ease),
+    background 0.4s var(--ease),
+    box-shadow 0.4s var(--ease) !important;
+  will-change: transform, height;
+}
+
+.navbar.shrunk { height: 58px; }
+.navbar.hidden { transform: translateY(-100%); }
+
+.navbar.shrunk .logo { font-size: 1.35rem; }
+
+@media (max-width: 768px) {
+  .navbar.shrunk { height: 54px; }
+  .navbar.shrunk + * .nav-links,
+  .nav-overlay { top: 54px; }
+}
+
+/* ---------------------------------------------------
+   #1 MAGNETIC CAPSULE INDICATOR (desktop only)
+   --------------------------------------------------- */
+@media (min-width: 769px) {
+  .nav-links {
+    position: relative;
+    padding: 6px;
+    background: rgba(244,241,234,0.04);
+    border-radius: 999px;
+    border: 1px solid rgba(244,241,234,0.06);
+  }
+
+  /* The capsule is a single absolutely-positioned pill that we move via JS */
+  .nav-capsule {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    height: calc(100% - 12px);
+    width: 0;
+    background: linear-gradient(135deg, rgba(255,91,34,0.18), rgba(106,92,255,0.18));
+    border: 1px solid rgba(255,91,34,0.35);
+    border-radius: 999px;
+    transform: translateX(0);
+    transition:
+      transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+      width     0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity   0.3s var(--ease);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    box-shadow:
+      0 0 24px -4px rgba(255,91,34,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+
+  .nav-links.has-capsule .nav-capsule { opacity: 1; }
+
+  /* Hide the old "→" indicator on desktop — capsule replaces it */
+  .nav-links li a::before { display: none; }
+  .nav-links li a.active { color: var(--paper); }
+  .nav-links li a:hover  { color: var(--paper); }
+
+  .nav-links li a {
+    position: relative;
+    z-index: 1;
+    padding: 10px 18px;
+    transition: color 0.25s var(--ease);
+  }
+}
+
+/* ---------------------------------------------------
+   #5 LIVE STATUS PILL — sits next to phone-icon
+   --------------------------------------------------- */
+.nav-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px 7px 10px;
+  background: rgba(244,241,234,0.06);
+  border: 1px solid rgba(244,241,234,0.12);
+  border-radius: 999px;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244,241,234,0.78);
+  white-space: nowrap;
+  margin-right: 12px;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.nav-status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2ecc71;
+  box-shadow: 0 0 0 0 rgba(46,204,113,0.6);
+  animation: ns-pulse 1.8s ease-out infinite;
+  flex-shrink: 0;
+}
+
+.nav-status b {
+  color: var(--paper, #f4f1ea);
+  font-weight: 700;
+}
+
+@keyframes ns-pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(46,204,113,0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(46,204,113,0);   }
+  100% { box-shadow: 0 0 0 0   rgba(46,204,113,0);   }
+}
+
+/* Shrink-mode: pill hides */
+.navbar.shrunk .nav-status {
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+}
+
+/* Hide on mobile — it gets a slot in the overlay */
+@media (max-width: 768px) {
+  .nav-status { display: none; }
+}
+
+/* ---------------------------------------------------
+   BURGER → animated 3-line ⇄ X
+   --------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Replace the ☰ character with three CSS lines */
+  .burger {
+    font-size: 0 !important;          /* hide ☰ glyph */
+    position: relative;
+  }
+  .burger::before,
+  .burger::after,
+  .burger > span.b-mid {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transform: translate(-50%, -50%);
+    transition: transform 0.35s var(--ease), opacity 0.25s var(--ease), width 0.35s var(--ease);
+  }
+  .burger::before { transform: translate(-50%, calc(-50% - 7px)); }
+  .burger::after  { transform: translate(-50%, calc(-50% + 7px)); }
+
+  .burger[aria-expanded="true"] {
+    transform: none;                  /* override rotation from navbar.css */
+    color: var(--paper);
+  }
+  .burger[aria-expanded="true"]::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  .burger[aria-expanded="true"]::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  .burger[aria-expanded="true"] > span.b-mid {
+    opacity: 0;
+    width: 0;
+  }
+}
+
+/* ---------------------------------------------------
+   #3 FULL-SCREEN MOBILE MENU OVERLAY
+   --------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Hide the old simple dropdown — overlay takes over */
+  .nav-links {
+    display: none !important;
+  }
+
+  /* The overlay element is injected by JS as <div class="nav-overlay"> */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    top: 64px;                        /* below navbar */
+    z-index: 998;
+    background:
+      radial-gradient(circle at 80% -10%, rgba(106,92,255,0.18), transparent 50%),
+      radial-gradient(circle at -10% 110%, rgba(255,91,34,0.18), transparent 55%),
+      var(--ink, #0e0e12);
+    display: flex;
+    flex-direction: column;
+    padding: 28px 24px 32px;
+    overflow-y: auto;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity   0.35s var(--ease);
+    isolation: isolate;
+  }
+
+  .navbar.shrunk + * .nav-overlay { top: 54px; }
+
+  .nav-overlay.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Decorative grid background */
+  .nav-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(244,241,234,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244,241,234,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(circle at 50% 30%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at 50% 30%, black 30%, transparent 80%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Status row inside overlay */
+  .nav-overlay__status {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px 6px 10px;
+    background: rgba(244,241,234,0.06);
+    border: 1px solid rgba(244,241,234,0.12);
+    border-radius: 999px;
+    font-family: var(--font-mono, 'Space Mono', monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244,241,234,0.75);
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s var(--ease) 0.05s, transform 0.4s var(--ease) 0.05s;
+  }
+  .nav-overlay__status::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2ecc71;
+    box-shadow: 0 0 0 0 rgba(46,204,113,0.6);
+    animation: ns-pulse 1.8s ease-out infinite;
+  }
+  .nav-overlay__status b { color: var(--paper); font-weight: 700; }
+
+  /* Menu items list — giant typography */
+  .nav-overlay__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+
+  .nav-overlay__list li {
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+
+  .nav-overlay__list li a {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 14px 0;
+    font-family: var(--font-display, 'Fraunces', serif);
+    font-size: clamp(2.2rem, 9vw, 3.4rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: var(--paper, #f4f1ea);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(244,241,234,0.08);
+    transition: color 0.25s var(--ease), padding-left 0.3s var(--ease);
+    position: relative;
+  }
+
+  .nav-overlay__list li a .idx {
+    font-family: var(--font-mono, 'Space Mono', monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    font-weight: 400;
+    color: var(--accent, #ff5b22);
+    width: 28px;
+    flex-shrink: 0;
+  }
+
+  .nav-overlay__list li a .sub {
+    display: block;
+    font-family: var(--font-mono, 'Space Mono', monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(244,241,234,0.45);
+    font-weight: 400;
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  .nav-overlay__list li a .label {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .nav-overlay__list li a .arrow {
+    font-family: var(--font-mono, 'Space Mono', monospace);
+    font-size: 1.2rem;
+    color: rgba(244,241,234,0.3);
+    transform: translateX(-6px);
+    opacity: 0;
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease), color 0.3s var(--ease);
+  }
+
+  .nav-overlay__list li a:active,
+  .nav-overlay__list li a.is-touched {
+    color: var(--accent, #ff5b22);
+    padding-left: 8px;
+  }
+  .nav-overlay__list li a:active .arrow,
+  .nav-overlay__list li a.is-touched .arrow {
+    transform: translateX(0);
+    opacity: 1;
+    color: var(--accent);
+  }
+
+  .nav-overlay__list li a.active-page { color: var(--accent); }
+  .nav-overlay__list li a.active-page .idx { color: var(--paper); }
+
+  /* Stagger reveal when overlay is open */
+  .nav-overlay.open .nav-overlay__status { opacity: 1; transform: translateY(0); }
+  .nav-overlay.open .nav-overlay__list li { opacity: 1; transform: translateX(0); }
+  .nav-overlay.open .nav-overlay__list li:nth-child(1) { transition-delay: 0.10s; }
+  .nav-overlay.open .nav-overlay__list li:nth-child(2) { transition-delay: 0.16s; }
+  .nav-overlay.open .nav-overlay__list li:nth-child(3) { transition-delay: 0.22s; }
+  .nav-overlay.open .nav-overlay__list li:nth-child(4) { transition-delay: 0.28s; }
+
+  /* Footer block — phone + social */
+  .nav-overlay__foot {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px dashed rgba(244,241,234,0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s var(--ease) 0.34s, transform 0.4s var(--ease) 0.34s;
+  }
+  .nav-overlay.open .nav-overlay__foot { opacity: 1; transform: translateY(0); }
+
+  .nav-overlay__foot small {
+    font-family: var(--font-mono, 'Space Mono', monospace);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244,241,234,0.45);
+  }
+
+  .nav-overlay__phone {
+    font-family: var(--font-display, 'Fraunces', serif);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--paper);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.25s var(--ease);
+  }
+  .nav-overlay__phone::before {
+    content: "→";
+    color: var(--accent);
+    font-family: var(--font-mono, monospace);
+    font-size: 1.1rem;
+  }
+  .nav-overlay__phone:active { color: var(--accent); }
+}
+
+/* Reduce motion respect */
+@media (prefers-reduced-motion: reduce) {
+  .nav-capsule,
+  .nav-overlay,
+  .nav-overlay__list li,
+  .nav-overlay__status,
+  .nav-overlay__foot,
+  .navbar { transition: none !important; }
+  .nav-overlay__list li,
+  .nav-overlay__status,
+  .nav-overlay__foot { opacity: 1 !important; transform: none !important; }
+}
