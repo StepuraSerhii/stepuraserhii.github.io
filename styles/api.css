@@ -256,3 +256,109 @@
 @media (max-width: 420px) {
   .api-row { grid-template-columns: 1fr; }   /* на дуже вузьких — 1 колонка */
 }
+
+/* ============================================
+   ЖИВИЙ ФОН + ПОЯВА КАРТОК
+   Чистий CSS/JS, бекенд не зачіпається.
+   ============================================ */
+
+/* Контейнер сторінки має бути над фоном */
+.api-console { position: relative; z-index: 1; }
+
+/* ---- Шар фону ---- */
+.api-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--ink);
+}
+
+/* Неонова сітка з повільним дрейфом */
+.api-bg__grid {
+  position: absolute;
+  inset: -50%;
+  background-image:
+    linear-gradient(rgba(255,91,34,0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,91,34,0.10) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 0%, transparent 72%);
+          mask-image: radial-gradient(ellipse at 50% 40%, #000 0%, transparent 72%);
+  animation: apiGridDrift 26s linear infinite;
+  opacity: 0.55;
+}
+
+@keyframes apiGridDrift {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(48px, 48px); }
+}
+
+/* Дві кольорові glow-плями, що дихають */
+.api-bg__glow {
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.22;
+  animation: apiGlowFloat 18s ease-in-out infinite alternate;
+}
+.api-bg__glow--1 {
+  top: -20%; left: -10%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+}
+.api-bg__glow--2 {
+  bottom: -25%; right: -12%;
+  background: radial-gradient(circle, var(--accent-2) 0%, transparent 70%);
+  animation-delay: -9s;
+}
+
+@keyframes apiGlowFloat {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(6%, 8%) scale(1.18); }
+}
+
+/* Світлові вузли мережі — мерехтять */
+.api-bg__nodes span {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(255,91,34,0.5);
+  animation: apiNodePulse 3.6s ease-in-out var(--d, 0s) infinite;
+}
+.api-bg__nodes span:nth-child(even) {
+  background: var(--accent-2);
+  box-shadow: 0 0 0 0 rgba(255,91,34,0.4);
+}
+
+@keyframes apiNodePulse {
+  0%, 100% { transform: scale(0.6); opacity: 0.25; box-shadow: 0 0 0 0 rgba(255,91,34,0.45); }
+  50%      { transform: scale(1);   opacity: 0.9;  box-shadow: 0 0 14px 4px rgba(255,91,34,0.0); }
+}
+
+/* ---- Поява карток при скролі ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px) scale(0.985);
+  transition:
+    opacity 0.7s var(--ease) var(--reveal-delay, 0s),
+    transform 0.7s var(--ease) var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Повага до prefers-reduced-motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .api-bg__grid,
+  .api-bg__glow,
+  .api-bg__nodes span { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
