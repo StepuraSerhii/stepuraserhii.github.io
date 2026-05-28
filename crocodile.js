@@ -19,7 +19,7 @@
     style.textContent = [
       ".croc-wrap{",
       "  position:fixed;",
-      "  right:28px;",
+      "  left:28px;",
       "  bottom:-220px;",            // схований під екраном
       "  width:150px;",
       "  height:200px;",
@@ -29,7 +29,7 @@
       "}",
       ".croc-wrap.croc-up{ bottom:-30px; }",                   // виліз нагору
       "@media (max-width:768px){",
-      "  .croc-wrap{ right:14px; width:120px; height:160px; }",
+      "  .croc-wrap{ left:14px; width:120px; height:160px; }",
       "}",
 
       /* лапка, що махає */
