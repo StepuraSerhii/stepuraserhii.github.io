@@ -108,6 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var overlay = document.createElement("div");
   overlay.className = "nav-overlay";
   overlay.setAttribute("aria-hidden", "true");
+  // Hide immediately to prevent any flash of in-flow content
+  overlay.style.cssText = "position:fixed;opacity:0;visibility:hidden;pointer-events:none;top:-9999px;";
 
   var statusHTML = '<span class="nav-overlay__status">LIVE · <b>847</b> CALLS TODAY · +18.4% ↗</span>';
   var listHTML = '<ul class="nav-overlay__list">';
@@ -137,6 +139,35 @@ document.addEventListener("DOMContentLoaded", function () {
   overlay.innerHTML = statusHTML + listHTML + footHTML;
   document.body.appendChild(overlay);
 
+  // ---- Bulletproof base styles via JS (works even if navbar-pro.css
+  //      fails to load or is cached). CSS file adds the pretty parts. ----
+  var mqMobileMenu = window.matchMedia("(max-width: 768px)");
+
+  function applyOverlayBaseStyle() {
+    var s = overlay.style;
+    if (mqMobileMenu.matches) {
+      // Mobile: fixed full-screen, hidden until .open
+      s.position = "fixed";
+      s.left = "0";
+      s.right = "0";
+      s.bottom = "0";
+      s.top = (navbar.offsetHeight || 64) + "px";
+      s.zIndex = "998";
+      var isOpen = overlay.classList.contains("open");
+      s.opacity = isOpen ? "1" : "0";
+      s.visibility = isOpen ? "visible" : "hidden";
+      s.pointerEvents = isOpen ? "auto" : "none";
+    } else {
+      // Desktop: overlay must never show — fully neutralised
+      s.position = "fixed";
+      s.opacity = "0";
+      s.visibility = "hidden";
+      s.pointerEvents = "none";
+      s.top = "-9999px";
+    }
+  }
+  applyOverlayBaseStyle();
+
   // ---- Open / close logic ----
   function openMenu() {
     navLinks.classList.add("active");
@@ -144,6 +175,8 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.setAttribute("aria-hidden", "false");
     burger.setAttribute("aria-expanded", "true");
     body.classList.add("nav-open");
+    body.style.overflow = "hidden";          // hard scroll-lock
+    applyOverlayBaseStyle();
   }
   function closeMenu() {
     navLinks.classList.remove("active");
@@ -151,11 +184,20 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.setAttribute("aria-hidden", "true");
     burger.setAttribute("aria-expanded", "false");
     body.classList.remove("nav-open");
+    body.style.overflow = "";                // release scroll-lock
+    applyOverlayBaseStyle();
   }
   function toggleMenu(e) {
     if (e) { e.preventDefault(); e.stopPropagation(); }
     if (overlay.classList.contains("open")) closeMenu(); else openMenu();
   }
+
+  // Re-evaluate overlay styling on resize / breakpoint change
+  window.addEventListener("resize", applyOverlayBaseStyle);
+  if (mqMobileMenu.addEventListener) mqMobileMenu.addEventListener("change", function () {
+    if (!mqMobileMenu.matches) closeMenu();  // entering desktop closes it
+    applyOverlayBaseStyle();
+  });
 
   burger.addEventListener("click", toggleMenu);
   burger.addEventListener("keydown", function (e) {
@@ -210,11 +252,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.key === "Escape" && overlay.classList.contains("open")) closeMenu();
   });
 
-  // ---- Close overlay when crossing into desktop ----
+  // ---- mqMobile used by capsule logic below ----
   var mqMobile = window.matchMedia("(min-width: 769px)");
-  var onMQ = function () { if (mqMobile.matches) closeMenu(); };
-  if (mqMobile.addEventListener) mqMobile.addEventListener("change", onMQ);
-  else if (mqMobile.addListener)  mqMobile.addListener(onMQ);
 
   // ----------------------------------------------------
   // #1 MAGNETIC CAPSULE (desktop only)
