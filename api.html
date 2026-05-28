@@ -50,73 +50,143 @@
     </nav>
   </header>
 
-  <section class="api-forms-wrapper">
+  <!-- ===================== API КОНСОЛЬ ===================== -->
+  <main class="api-console">
 
-    <div class="api-form-container">
-      <h2>З'єднання номеру і схеми переадресації</h2>
+    <!-- Заголовок секції -->
+    <header class="api-console__head">
+      <span class="api-console__eyebrow">REST · CALL CONTROL</span>
+      <h1 class="api-console__title">Консоль з'єднань</h1>
+      <p class="api-console__lead">
+        Тестові ендпоінти для з'єднання номерів зі схемами переадресації та SIP-акаунтами.
+        Натисніть на заголовок картки, щоб згорнути її.
+      </p>
+    </header>
 
-      <label for="phone3">Введіть номер</label>
-      <input id="phone3" name="phone3" type="tel" placeholder="+380..." required />
+    <!-- Сітка форм. Щоб додати нову форму — просто скопіюй один <div class="api-form-container"> блок. -->
+    <section class="api-forms-wrapper">
 
-      <label for="authKey3">Auth key</label>
-      <input id="authKey3" name="authKey3" type="text" placeholder="Ваш Auth-key" required />
+      <!-- ╔════ ФОРМА 1: СХЕМА ════╗ -->
+      <div class="api-form-container" data-open="true">
+        <button type="button" class="api-form-toggle" aria-expanded="true">
+          <h2>З'єднання номеру і схеми переадресації</h2>
+          <span class="api-form-chev" aria-hidden="true">›</span>
+        </button>
 
-      <label for="projectId3">ID проєкту</label>
-      <input id="projectId3" name="projectId3" type="text" placeholder="ID проєкту" required />
+        <div class="api-form-body">
+          <div class="api-row">
+            <div class="api-field api-field--full">
+              <label for="phone3">Введіть номер</label>
+              <input id="phone3" name="phone3" type="tel" placeholder="+380..." required />
+            </div>
 
-      <label for="schemeId3">ID схеми</label>
-      <input id="schemeId3" name="schemeId3" type="text" placeholder="ID схеми" required />
+            <div class="api-field api-field--full">
+              <label for="authKey3">Auth key</label>
+              <input id="authKey3" name="authKey3" type="text" placeholder="Ваш Auth-key" required />
+            </div>
 
-      <label for="direction3">Напрямок дзвінка</label>
-      <select id="direction3" name="direction3" required>
-        <option value="0">Клієнт &#x27A1; Схема</option>
-        <option value="1">Схема &#x27A1; Клієнт</option>
-      </select>
+            <div class="api-field">
+              <label for="projectId3">ID проєкту</label>
+              <input id="projectId3" name="projectId3" type="text" placeholder="ID проєкту" required />
+            </div>
 
-      <label for="callType3">Тип дзвінка</label>
-      <select id="callType3" name="callType3" required>
-        <option value="in">Вхідний</option>
-        <option value="out">Вихідний</option>
-      </select>
+            <div class="api-field">
+              <label for="schemeId3">ID схеми</label>
+              <input id="schemeId3" name="schemeId3" type="text" placeholder="ID схеми" required />
+            </div>
 
-      <button class="fancy-button" id="connectButton3">З'єднати з схемою</button>
-    </div>
+            <div class="api-field">
+              <label for="direction3">Напрямок дзвінка</label>
+              <select id="direction3" name="direction3" required>
+                <option value="0">Клієнт &#x27A1; Схема</option>
+                <option value="1">Схема &#x27A1; Клієнт</option>
+              </select>
+            </div>
 
-    <div class="api-form-container">
-      <h2>З'єднання номеру і SIP акаунта</h2>
+            <div class="api-field">
+              <label for="callType3">Тип дзвінка</label>
+              <select id="callType3" name="callType3" required>
+                <option value="in">Вхідний</option>
+                <option value="out">Вихідний</option>
+              </select>
+            </div>
+          </div>
 
-      <label for="phone4">Введіть номер</label>
-      <input id="phone4" name="phone4" type="tel" placeholder="+380..." required />
+          <button class="fancy-button" id="connectButton3">З'єднати з схемою</button>
+        </div>
+      </div>
 
-      <label for="authKey4">Auth key</label>
-      <input id="authKey4" name="authKey4" type="text" placeholder="Ваш Auth-key" required />
+      <!-- ╔════ ФОРМА 2: SIP ════╗ -->
+      <div class="api-form-container" data-open="true">
+        <button type="button" class="api-form-toggle" aria-expanded="true">
+          <h2>З'єднання номеру і SIP акаунта</h2>
+          <span class="api-form-chev" aria-hidden="true">›</span>
+        </button>
 
-      <label for="projectId4">ID проєкту</label>
-      <input id="projectId4" name="projectId4" type="text" placeholder="ID проєкту" required />
+        <div class="api-form-body">
+          <div class="api-row">
+            <div class="api-field api-field--full">
+              <label for="phone4">Введіть номер</label>
+              <input id="phone4" name="phone4" type="tel" placeholder="+380..." required />
+            </div>
 
-      <label for="sipLogin4">SIP login</label>
-      <input id="sipLogin4" name="sipLogin4" type="text" placeholder="SIP login" required />
+            <div class="api-field api-field--full">
+              <label for="authKey4">Auth key</label>
+              <input id="authKey4" name="authKey4" type="text" placeholder="Ваш Auth-key" required />
+            </div>
 
-      <label for="direction4">Напрямок дзвінка</label>
-      <select id="direction4" name="direction4" required>
-        <option value="0">Клієнт &#x27A1; Менеджер</option>
-        <option value="1">Менеджер &#x27A1; Клієнт</option>
-      </select>
+            <div class="api-field">
+              <label for="projectId4">ID проєкту</label>
+              <input id="projectId4" name="projectId4" type="text" placeholder="ID проєкту" required />
+            </div>
 
-      <label for="callType4">Тип дзвінка</label>
-      <select id="callType4" name="callType4" required>
-        <option value="in">Вхідний</option>
-        <option value="out">Вихідний</option>
-      </select>
+            <div class="api-field">
+              <label for="sipLogin4">SIP login</label>
+              <input id="sipLogin4" name="sipLogin4" type="text" placeholder="SIP login" required />
+            </div>
 
-      <button class="fancy-button" id="connectButton4">З'єднати через SIP</button>
-    </div>
+            <div class="api-field">
+              <label for="direction4">Напрямок дзвінка</label>
+              <select id="direction4" name="direction4" required>
+                <option value="0">Клієнт &#x27A1; Менеджер</option>
+                <option value="1">Менеджер &#x27A1; Клієнт</option>
+              </select>
+            </div>
 
-  </section>
+            <div class="api-field">
+              <label for="callType4">Тип дзвінка</label>
+              <select id="callType4" name="callType4" required>
+                <option value="in">Вхідний</option>
+                <option value="out">Вихідний</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="fancy-button" id="connectButton4">З'єднати через SIP</button>
+        </div>
+      </div>
+
+    </section>
+  </main>
 
   <!-- 🔚 ФУТЕР -->
   <footer class="footer">
     <p>Зв’яжіться з нами: <a href="tel:+380970000000">+380970000000</a></p>
   </footer>
+
+  <!-- Згортання/розгортання карток. Бекенд (script.js) не чіпаємо. -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.api-form-container').forEach(function (card) {
+        var toggle = card.querySelector('.api-form-toggle');
+        if (!toggle) return;
+        toggle.addEventListener('click', function () {
+          var open = card.getAttribute('data-open') === 'true';
+          card.setAttribute('data-open', String(!open));
+          toggle.setAttribute('aria-expanded', String(!open));
+        });
+      });
+    });
+  </script>
 </body>
 </html>
