@@ -20,8 +20,8 @@
     style.textContent = `
       .tbot-wrap {
         position: fixed;
-        left: 28px;
-        bottom: 28px;
+        right: 28px;
+        top: 90px;
         z-index: 9990;
         display: flex;
         flex-direction: column;
@@ -45,7 +45,8 @@
         border: 1px solid rgba(255,255,255,0.12);
         white-space: nowrap;
         opacity: 0;
-        transform: translateY(6px);
+        order: 2;
+        transform: translateY(-6px);
         transition: opacity 0.3s ease, transform 0.3s ease;
         pointer-events: none;
       }
@@ -221,7 +222,7 @@
 
       /* Мобайл */
       @media (max-width: 768px) {
-        .tbot-wrap { left: 16px; bottom: 20px; }
+        .tbot-wrap { right: 16px; top: 80px; }
         .tbot-avatar { width: 62px; height: 62px; }
         .tbot-arc { width: 74px; height: 74px; }
       }
