@@ -20,7 +20,7 @@
     style.textContent = `
       .tbot-wrap {
         position: fixed;
-        right: 28px;
+        left: 28px;
         bottom: 28px;
         z-index: 9990;
         display: flex;
@@ -221,7 +221,7 @@
 
       /* Мобайл */
       @media (max-width: 768px) {
-        .tbot-wrap { right: 16px; bottom: 20px; }
+        .tbot-wrap { left: 16px; bottom: 20px; }
         .tbot-avatar { width: 62px; height: 62px; }
         .tbot-arc { width: 74px; height: 74px; }
       }
